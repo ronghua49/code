@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.haoha.mapper.BookMapper">
+
+    <resultMap id="BookMap" type="com.haohua.entity.Book">
+        <id column="id" property="id"/>
+        <result column="author" property="author"/>
+        <result column="total" property="total"/>
+        <result column="nowNum" property="nowNum"/>
+        <result column="isbn" property="isbn"/>
+    </resultMap>
+
+
+    <resultMap id="bookOneCardMap" type="com.haohua.entity.Book" extends="BookMap">
+        <collection property="card" ofType="com.haohua.entity.Card">
+            <id column="id" property="id"/>
+            <result column="name" property="name"/>
+            <result column="code" property="code"/>
+        </collection>
+    </resultMap>
+
+    <select id="findByCardId" resultMap="bookOneCardMap">
+        SELECT
+           	t_book.id,author,total,nowNum,isbn,,card.id as card_id,t_card.name,code
+        FROM
+            t_book
+        INNER JOIN t_book_card ON t_book.id = t_book_card.bookid
+        INNER JOIN t_card ON t_book_card.cardid = t_card.id
+        where t_card.id=#{id}
+    </select>
+
+    <resultMap id="lendBookMap" type="com.haohua.entity.Book" extends="BookMap">
+        <association property="card" javaType="com.haohua.entity.Card">
+            <id column="id" property="id"/>
+            <result column="name" property="name"/>
+            <result column="code" property="code"/>
+        </association>
+    </resultMap>
+
+<!--<resultMap id="bookKeyMap" type="com.haohua.entity.Book" extends="BookMap">
+    <collection property=""
+    
+</resultMap>-->
+    
+    
+    <!--<select id="findBykeys" parameterType="map" resultMap="bookKeyMap" parameterMap="map">
+         SELECT
+           	t_book.id,author,total,nowNum,isbn,cardid,t_card.`name`,`code`
+        FROM
+            t_book
+        INNER JOIN t_book_card ON t_book.id = t_book_card.bookid
+        INNER JOIN t_card ON t_book_card.cardid = t_card.id
+       <where>
+           <if test="code !=null and code !=''">
+               code=#{code}
+           </if>
+           <if test="author!=null and author ！=''">
+               and author like %#{author}%
+           </if>
+       </where>
+    </select>-->
+
+
+
+
+
+
+
+    <insert id="insertCard" parameterType="list">
+        INSERT INTO t_card (NAME, CODE)
+        VALUES
+        <foreach collection="cardList" item="card" separator=",">
+            (#{card.name},#{card.code})
+        </foreach>
+    </insert>
+</mapper>

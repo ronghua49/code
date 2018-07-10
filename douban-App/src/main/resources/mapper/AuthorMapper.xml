@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haohua.mapper.AuthorMapper">
+
+  <insert id="insertAuthor" parameterType="com.haohua.entity.Author" useGeneratedKeys="true" keyProperty="id">
+      insert into author (author_name,address)
+      values (#{authorName},#{address});
+  </insert>
+    
+   <delete id="deleteById" >
+       delete from author
+       where id=#{id}
+   </delete>
+
+    <resultMap id="authorMap" type="com.haohua.entity.Author">
+        <id column="id" property="id"/>
+        <result column="author_name"    property="authorName"/>
+        <result column="address"    property="address"/>
+    </resultMap>
+
+    <select id="selectById" resultMap="authorMap">
+        select id, author_name,address from author
+        where id=#{id}
+    </select>
+
+    <!--基本数据类型的参数类型可以省略-->
+    <!--查找所有，结果集类型根据实际应用判定，泛型需要resultype 确定-->
+    <select id="selectAll" resultType="com.haohua.entity.Author">
+        select  id ,author_name,address from author where author_name like #{string}
+
+    </select>
+
+
+    <resultMap id="authorPage" type="com.haohua.entity.Author">
+        <id column="id" property="id"/>
+        <result column="author_name"    property="authorName"/>
+        <result column="address"    property="address"/>
+
+    </resultMap>
+
+    <select id="findByPage"  resultMap="authorPage" parameterType="int">
+       select id,author_name,address from author
+         LIMIT #{start},#{pageSize};
+    </select>
+
+
+
+    <update id="updateById" parameterType="com.haohua.entity.Author">
+        update author set
+        author_name=#{authorName},
+        address=#{address}
+        where id=#{id}
+    </update>
+</mapper>
