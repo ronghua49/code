@@ -5,7 +5,7 @@ package com.haohua.entity;    /*
 
 public class Book {
     private Integer id;
-    private String name;
+    private String bookName;
     private String author;
     private Integer total;
     private Integer nowNum;
@@ -20,12 +20,12 @@ public class Book {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getbookName() {
+        return bookName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String bookName) {
+        this.bookName = bookName;
     }
 
     public String getAuthor() {
@@ -72,7 +72,7 @@ public class Book {
     public String toString() {
         return "Book{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + bookName + '\'' +
                 ", author='" + author + '\'' +
                 ", total=" + total +
                 ", nowNum=" + nowNum +

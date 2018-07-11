@@ -7,8 +7,10 @@ public class Card {
     private Integer id;
     private String name;
     private String code;
-        public Card(){
-        }
+
+    public Card() {
+    }
+
     public Card(String name, String code) {
         this.name = name;
         this.code = code;

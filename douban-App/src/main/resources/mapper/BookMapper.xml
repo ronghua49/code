@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<mapper namespace="com.haoha.mapper.BookMapper">
-
-    <resultMap id="BookMap" type="com.haohua.entity.Book">
+<mapper namespace="com.haohua.mapper.BookMapper">
+    <insert id="save" parameterType="com.haohua.entity.Book">
+        insert into (author,nowNum,isbn,total) values (#{author},#{nowNum},#{isbn},#{total})
+    </insert>
+<!--书籍的结果映射-->
+    <resultMap id="baseMap" type="com.haohua.entity.Book">
         <id column="id" property="id"/>
+        <result column="bookName" property="bookName"/>
         <result column="author" property="author"/>
         <result column="total" property="total"/>
         <result column="nowNum" property="nowNum"/>
         <result column="isbn" property="isbn"/>
     </resultMap>
 
-
-    <resultMap id="bookOneCardMap" type="com.haohua.entity.Book" extends="BookMap">
+<!--在封装书籍结果集的基础上，对书籍内部card对象属性结果集封装-->
+    <resultMap id="bookCardMap" type="com.haohua.entity.Book" extends="baseMap">
         <collection property="card" ofType="com.haohua.entity.Card">
             <id column="id" property="id"/>
             <result column="name" property="name"/>
@@ -21,33 +24,31 @@
         </collection>
     </resultMap>
 
-    <select id="findByCardId" resultMap="bookOneCardMap">
-        SELECT
-           	t_book.id,author,total,nowNum,isbn,,card.id as card_id,t_card.name,code
+<!--根据cardid查找对应的书籍和借书人信息-->
+    <select id="findByCardId"  resultMap="bookCardMap" parameterType="int">
+          SELECT
+             t_book.id,t_book.name as bookName,author,total,nowNum,isbn,cardid,t_card.`name`,`code`
         FROM
             t_book
         INNER JOIN t_book_card ON t_book.id = t_book_card.bookid
         INNER JOIN t_card ON t_book_card.cardid = t_card.id
         where t_card.id=#{id}
     </select>
+    <!--查找现在所借出的所有书籍的借书人和书籍信息-->
+    <!--相同列名的结果集可用一个结果映射封装-->
+    <select id="findLendBook"  resultMap="bookCardMap" >
+          SELECT
+             t_book.id,t_book.name as bookName,author,total,nowNum,isbn,cardid,t_card.`name`,`code`
+        FROM
+            t_book
+        INNER JOIN t_book_card ON t_book.id = t_book_card.bookid
+        INNER JOIN t_card ON t_book_card.cardid = t_card.id
+    </select>
 
-    <resultMap id="lendBookMap" type="com.haohua.entity.Book" extends="BookMap">
-        <association property="card" javaType="com.haohua.entity.Card">
-            <id column="id" property="id"/>
-            <result column="name" property="name"/>
-            <result column="code" property="code"/>
-        </association>
-    </resultMap>
-
-<!--<resultMap id="bookKeyMap" type="com.haohua.entity.Book" extends="BookMap">
-    <collection property=""
-    
-</resultMap>-->
-    
-    
-    <!--<select id="findBykeys" parameterType="map" resultMap="bookKeyMap" parameterMap="map">
+<!--根据关键字查询所借书籍出的详情信息-->
+    <select id="findBykeys" parameterType="map" resultMap="bookCardMap" >
          SELECT
-           	t_book.id,author,total,nowNum,isbn,cardid,t_card.`name`,`code`
+           	t_book.id,t_book.name as bookName,author,total,nowNum,isbn,cardid,t_card.`name`,`code`
         FROM
             t_book
         INNER JOIN t_book_card ON t_book.id = t_book_card.bookid
@@ -56,18 +57,45 @@
            <if test="code !=null and code !=''">
                code=#{code}
            </if>
-           <if test="author!=null and author ！=''">
-               and author like %#{author}%
+           <if test="author !=null and author !=''">
+               and author like "%"#{author}"%"
            </if>
        </where>
-    </select>-->
+    </select>
 
+<!--根据cardid 查询card信息-->
+    <select id="findCardById" resultType="com.haohua.entity.Card">
 
+        select id ,name,code from t_card
+        where id=#{id}
+    </select>
 
+    <!--查找借书卡id为特定范围的借书详情信息-->
+    <select id="findByCardIds" parameterType="list" resultMap="bookCardMap">
+        SELECT
+        t_book.id,t_book.name as bookName,author,total,nowNum,isbn,cardid,t_card.`name`,`code`
+        FROM
+        t_book
+        INNER JOIN t_book_card ON t_book.id = t_book_card.bookid
+        INNER JOIN t_card ON t_book_card.cardid = t_card.id
+        where cardid in
+        <foreach collection="cardIdList" separator="," item="id" open="(" close=")">
+            #{id}
+        </foreach>
+    </select>
 
+    <!--修改图书证信息-->
+    <update id="updateCard" parameterType="com.haohua.entity.Card">
+        UPDATE t_card
+        <set>
+            <if test="code !=null">code=#{code},</if>
+            <if test="name !=null">name=#{name}</if>
+        </set>
+        WHERE
+            id = #{id}
+    </update>
 
-
-
+<!--批量插入图书证-->
     <insert id="insertCard" parameterType="list">
         INSERT INTO t_card (NAME, CODE)
         VALUES
@@ -75,4 +103,7 @@
             (#{card.name},#{card.code})
         </foreach>
     </insert>
+
+
+
 </mapper>
