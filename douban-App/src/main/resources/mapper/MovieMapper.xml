@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haohua.mapper.MovieMapper">
+
+ <resultMap id="movieMap" type="movie">
+    <id column="id" property="id"/>
+     <result column="movie_name" property="moiveName"/>
+     <result column="director_name" property="directorName"/>
+     <result column="create_time" property="timestamp"/>
+     <result column="area" property="area"/>
+     <result column="year" property="year"/>
+     <result column="scan_num" property="scanNum"/>
+     <result column="reply_num" property="replyNum"/>
+
+     <collection property="typeList" ofType="type">
+         <id column="type_id" property="id"/>
+         <result column="type_name" property="typeName"/>
+     </collection>
+
+ </resultMap>
+
+
+<select id="findByMovieId" resultMap="movieMap">
+        SELECT
+          t_movie.id,movie_name,director_name,t_movie.create_time,area,`year`,scan_num,reply_num,type_id,type_name
+        FROM
+            t_movie
+        INNER JOIN t_movie_type ON t_movie.id = t_movie_type.movie_id
+        INNER JOIN t_type ON t_movie_type.type_id = t_type.id
+        WHERE t_movie.id=#{id};
+</select>
+
+
+</mapper>

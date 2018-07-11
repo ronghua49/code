@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haohua.mapper.CommentaryMapper">
+
+
+    <resultMap id="baseMap" type="Commentary">
+        <id column="id" property="id"/>
+        <result column="create_time" property="commentaryTime"/>
+        <result column="content" property="content"/>
+        <result column="state" property="state"/>
+        <result column="user_id" property="userId"/>
+        <result column="movie_id" property="movieId"/>
+    </resultMap>
+
+    <resultMap id="commentaryMap" type="Commentary" extends="baseMap">
+       <association property="movie" javaType="movie">
+           <id column="movie_id" property="id"/>
+           <result column="movie_name" property="moiveName"/>
+           <result column="director_name" property="directorName"/>
+           <result column="area" property="area"/>
+           <result column="year" property="year"/>
+           <result column="scan_num" property="scanNum"/>
+           <result column="reply_num" property="replyNum"/>
+       </association>
+       <association property="user" javaType="user">
+           <id column="id" property="id"/>
+           <result column="username" property="username"/>
+       </association>
+    </resultMap>
+
+
+<!--根据评论的id查询对应的电影和评论者的详情信息，多对一，一对一练习-->
+    <select id="findByCommentaryId" resultMap="commentaryMap" parameterType="list">
+        SELECT
+            c.id,
+            c.create_time ,
+            c.content,
+            state,
+            user_id,
+            username,
+            t_movie.id movie_id,
+            movie_name,
+            director_name,
+            area,
+            YEAR,
+            scan_num,
+            reply_num
+        FROM
+            t_commentary c
+        INNER JOIN t_movie ON c.movie_id = t_movie.id
+        INNER JOIN t_user ON c.user_id = t_user.id
+        where c.id in
+        <foreach collection="idList" item="id" separator="," open="(" close=")">
+              #{id}
+        </foreach>
+    </select>
+    
+    <select id="findByUserId" resultMap="commentaryMap" parameterType="int">
+         SELECT
+            c.id,
+            c.create_time ,
+            c.content,
+            state,
+            user_id,
+            username,
+            t_movie.id movie_id,
+            movie_name,
+            director_name,
+            area,
+            YEAR,
+            scan_num,
+            reply_num
+        FROM
+            t_commentary c
+        INNER JOIN t_movie ON c.movie_id = t_movie.id
+        INNER JOIN t_user ON c.user_id = t_user.id
+        where user_id=#{id}
+    </select>
+</mapper>
