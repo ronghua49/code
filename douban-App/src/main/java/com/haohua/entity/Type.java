@@ -3,9 +3,10 @@ package com.haohua.entity;    /*
  * @date 2018/7/11
  */
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Type {
+public class Type implements Serializable {
     private Integer id;
     private String typeName;
     private Timestamp timestamp;

@@ -3,13 +3,15 @@ package com.haohua.entity;    /*
  * @date 2018/7/11
  */
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
-public class Movie {
+public class Movie implements Serializable {
     private Integer id;
-    private String moiveName;
+    private String movieName;
     private String directorName;
+    private String imgName;
     private String  area;
     private Integer year;
     private Timestamp timestamp;
@@ -25,12 +27,20 @@ public class Movie {
         this.id = id;
     }
 
-    public String getMoiveName() {
-        return moiveName;
+    public String getImgName() {
+        return imgName;
     }
 
-    public void setMoiveName(String moiveName) {
-        this.moiveName = moiveName;
+    public void setImgName(String imgName) {
+        this.imgName = imgName;
+    }
+
+    public String getMovieName() {
+        return movieName;
+    }
+
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
     }
 
     public String getDirectorName() {
@@ -93,7 +103,7 @@ public class Movie {
     public String toString() {
         return "Movie{" +
                 "id=" + id +
-                ", moiveName='" + moiveName + '\'' +
+                ", moiveName='" + movieName + '\'' +
                 ", directorName='" + directorName + '\'' +
                 ", area='" + area + '\'' +
                 ", year=" + year +

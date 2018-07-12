@@ -29,5 +29,6 @@
         <mapper resource="mapper/BookMapper.xml"/>
         <mapper resource="mapper/MovieMapper.xml"/>
         <mapper resource="mapper/CommentaryMapper.xml"/>
+        <mapper resource="mapper/ReplyMapper.xml"/>
     </mappers>
 </configuration>

@@ -11,14 +11,17 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import java.io.IOException;
 import java.io.Reader;
 
+/**获得sqlsession工厂的单例模式,和会话sqlsession
+ * @author Administrator
+ */
 public class SqlSessionUtil {
-    //获得sqlsession工厂的单例模式
+
     private static SqlSessionFactory SqlSessionFactory;
     static {
         Reader reader=null;
         try {
             //从主配置文件获得流,从流中获取会话工厂
-           reader= Resources.getResourceAsReader("Mybatis.xml");
+           reader= Resources.getResourceAsReader("sqlMapConfig.xml");
         } catch (IOException e) {
             e.printStackTrace();
         }

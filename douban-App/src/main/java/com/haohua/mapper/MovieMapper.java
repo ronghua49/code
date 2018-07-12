@@ -7,7 +7,10 @@ import com.haohua.entity.Movie;
 
 import java.util.List;
 
+/**对应movieMapper.xml的增删该查接口
+ * @author Administrator
+ */
 public interface MovieMapper {
-    List<Movie> findByMovieId(Integer id);
-
+   Movie findByMovieId(Integer id) ;
+    void updateByMovie(Movie movie);
 }

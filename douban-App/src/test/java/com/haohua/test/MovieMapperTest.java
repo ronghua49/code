@@ -31,11 +31,17 @@ public class MovieMapperTest {
 
     @Test
     public void findByMovieIdTest(){
-        List<Movie> movieList= movieMapper.findByMovieId(47);
-        for(Movie movie: movieList){
-        logger.debug("movie:{}",movie);
-        }
+        Movie justMovie = movieMapper.findByMovieId(47);
+        logger.debug("movie:{}",justMovie);
+        System.out.println("....................................");
+        sqlSession.close();
+        sqlSession = SqlSessionUtil.getSqlSession();
+        movieMapper = sqlSession.getMapper(MovieMapper.class);
+        Movie movie = movieMapper.findByMovieId(47);
+        movie.setScanNum(100);
+        movieMapper.updateByMovie(movie);
     }
+
 
 
 }
