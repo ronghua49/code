@@ -3,6 +3,8 @@ package com.haohua.test;    /*
  * @date 2018/7/12
  */
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.haohua.entity.Reply;
 import com.haohua.entity.ReplyExample;
 import com.haohua.mapper.CommentaryMapper;
@@ -20,8 +22,8 @@ import java.util.List;
 
 public class MybatisGeneratorReplyMapperTest {
     Logger logger = LoggerFactory.getLogger(MybatisGeneratorReplyMapperTest.class);
-    SqlSession sqlSession ;
-    ReplyMapper replyMapper;
+   private SqlSession sqlSession ;
+    private ReplyMapper replyMapper;
     @Before
     public void before(){
         sqlSession = SqlSessionUtil.getSqlSession();
@@ -65,7 +67,6 @@ public class MybatisGeneratorReplyMapperTest {
             System.out.println(reply.getId());
         sqlSession.commit();
         }
-
         @Test
         public void updateById(){
         Reply reply = replyMapper.selectByPrimaryKey(15);
@@ -87,7 +88,42 @@ public class MybatisGeneratorReplyMapperTest {
         replyMapper.deleteByPrimaryKey(36);
         sqlSession.commit();
         }
-
-
+        @Test
+    public void orderBydesc(){
+        ReplyExample replyExample = new ReplyExample();
+        replyExample.createCriteria().andUserIdEqualTo(3);
+        replyExample.setOrderByClause("id");
+        List<Reply> replyList = replyMapper.selectByExample(replyExample);
+        for(Reply reply:replyList){
+            System.out.println(reply);
+        }
+    }
+    @Test
+    public void pageHelperTest(){
+            //每页显示5条，显示第二页的数据
+        PageHelper.startPage(2,5);
+        List<Reply> replyList = replyMapper.selectByExample(null);
+        for(Reply reply:replyList){
+        System.out.println(reply);
+        }
+    }
+    @Test
+    public void pageHelperTest2(){
+        //在查询结果中从0数到5，开始显示，显示10 条数据
+        PageHelper.offsetPage(5,10);
+         List<Reply> replyList = replyMapper.selectByExample(null);
+        for(Reply reply:replyList){
+            System.out.println(reply);
+        }
+    }
+    @Test
+    public void pagerInfoTest(){
+        PageHelper.startPage(3,5);
+        List<Reply> replyList = replyMapper.selectByExampleWithBLOBs(null);
+        //将分页的查询结果，转换为pageInfo对象，通过前台分页插件展示页面
+        PageInfo<Reply> pageInfo = new PageInfo<>(replyList);
+        for(Reply reply :pageInfo.getList()){
+            System.out.println(reply.getId()+"--->"+reply.getContent());
+        }
+    }
 }
-;
