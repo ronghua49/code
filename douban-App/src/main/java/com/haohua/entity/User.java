@@ -5,8 +5,14 @@ package com.haohua.entity;    /*
 
 public class User {
     private Integer id;
-    private String username;
+    private String userName;
 
+    public String getUserName() {
+        return userName;
+    }
+    public void setUserName(String username) {
+        this.userName = username;
+    }
     public Integer getId() {
         return id;
     }
@@ -14,20 +20,11 @@ public class User {
     public void setId(Integer id) {
         this.id = id;
     }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
+                ", userName='" + userName + '\'' +
                 '}';
     }
 }

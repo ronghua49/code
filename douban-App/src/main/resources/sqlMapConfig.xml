@@ -11,6 +11,10 @@
     <typeAliases>
         <package name="com.haohua.entity"/>
     </typeAliases>
+    <!--配置分页插件的完全限定名-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+    </plugins>
 
     <environments default="development">
         <environment id="development">
@@ -25,10 +29,13 @@
     </environments>
 
     <mappers>
-        <mapper resource="mapper/AuthorMapper.xml"/>
+      <!--  <mapper resource="mapper/AuthorMapper.xml"/>
         <mapper resource="mapper/BookMapper.xml"/>
         <mapper resource="mapper/MovieMapper.xml"/>
         <mapper resource="mapper/CommentaryMapper.xml"/>
+        <mapper resource="mapper/ReplyMapper.xml"/>-->
+      <mapper class="com.haohua.mapper.MovieMapper"/>
         <mapper resource="mapper/ReplyMapper.xml"/>
     </mappers>
+
 </configuration>

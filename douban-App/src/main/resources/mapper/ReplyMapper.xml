@@ -284,4 +284,27 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+<resultMap id="movie-replyContent" type="movieReply" >
+
+  <collection property="userList" ofType="user" >
+    <result column="username" property="userName"/>
+  </collection>
+  <collection property="reply" ofType="reply">
+    <result column="content" property="content"/>
+  </collection>
+  <collection property="movie" ofType="movie">
+    <result column="movie_name" property="movieName"/>
+  </collection>
+</resultMap>
+
+  <select id="findByMovieName" resultMap="movie-replyContent" >
+  SELECT
+     	t_user.id, username,t_reply.content ,movie_name
+  FROM
+      t_reply
+  INNER JOIN t_movie ON t_reply.movie_id = t_movie.id INNER JOIN t_user on t_reply.user_id = t_user.id
+  WHERE
+      movie_name LIKE "%"#{movieName}"%"
+  </select>
 </mapper>
