@@ -4,6 +4,8 @@ package com.haohua.test;    /*
  */
 
 import com.haohua.entity.Movie;
+import com.haohua.entity.ReplyExample;
+import com.haohua.entity.User;
 import com.haohua.mapper.MovieMapper;
 import com.haohua.util.SqlSessionUtil;
 import org.apache.ibatis.session.SqlSession;
@@ -42,6 +44,13 @@ public class MovieMapperTest {
         movieMapper.updateByMovie(movie);
     }
 
-
-
+    @Test
+    public void save(){
+        Movie movie = new Movie();
+        movie.setArea("美国");
+        movie.setDirectorName("巨石强森");
+        movie.setMovieName("狂暴巨兽");
+        movieMapper.saveMovie(movie);
+        sqlSession.commit();
+    }
 }

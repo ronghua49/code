@@ -7,6 +7,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.haohua.entity.Reply;
 import com.haohua.entity.ReplyExample;
+import com.haohua.entity.User;
+import com.haohua.entity.resultMap.MovieReply;
 import com.haohua.mapper.CommentaryMapper;
 import com.haohua.mapper.ReplyMapper;
 import com.haohua.util.SqlSessionUtil;
@@ -16,7 +18,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,10 +34,6 @@ public class MybatisGeneratorReplyMapperTest {
     public void after(){
         sqlSession.close();
     }
-
-
-
-
     @Test
         public void fiandById(){
        ReplyExample example = new ReplyExample();
@@ -124,6 +121,13 @@ public class MybatisGeneratorReplyMapperTest {
         PageInfo<Reply> pageInfo = new PageInfo<>(replyList);
         for(Reply reply :pageInfo.getList()){
             System.out.println(reply.getId()+"--->"+reply.getContent());
+        }
+    }
+@Test
+    public void findByMoveName(){
+        List<MovieReply> replies =replyMapper.findByMovieName("大话");
+        for(MovieReply reply: replies){
+            System.out.println(reply);
         }
     }
 }

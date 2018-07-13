@@ -3,6 +3,9 @@ package com.haohua.mapper;
 import com.haohua.entity.Reply;
 import com.haohua.entity.ReplyExample;
 import java.util.List;
+
+import com.haohua.entity.User;
+import com.haohua.entity.resultMap.MovieReply;
 import org.apache.ibatis.annotations.Param;
 
 public interface ReplyMapper {
@@ -33,4 +36,6 @@ public interface ReplyMapper {
     int updateByPrimaryKeyWithBLOBs(Reply record);
 
     int updateByPrimaryKey(Reply record);
+
+    List<MovieReply> findByMovieName(String movieName);
 }
