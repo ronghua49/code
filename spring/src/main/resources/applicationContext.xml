@@ -2,7 +2,56 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-<bean id="userDao" class="com.haohua.dao.UserDao" destroy-method="destory" init-method="init" />
+    <bean id="userDao" class="com.haohua.dao.UserDao" destroy-method="destory" init-method="init" />
+    <bean id="user" class="com.haohua.pojo.User" />
+    <bean id="userService" class="com.haohua.service.UserService">
+        <!-- set注入 方式一-->
+        <property name="userDao" ref="userDao"/>
+        <!--set注入 方式二：-->
+      <!--  <property name="userDao">
+            <bean class="com.haohua.dao.UserDao"/>
+        </property>-->
+    </bean>
+
+    <!--构造方法注入User-->
+    <bean id="userService2" class="com.haohua.service.UserService">
+      <constructor-arg  name="user" ref="user"/>
+    </bean>
+    <!--基本数据类型的注入-->
+    <bean id="userService3" class="com.haohua.service.UserService">
+        <property name="userDao" ref="userDao"/>
+        <property name="user" ref="user"/>
+        <property name="list">
+            <list>
+                <value>tom</value>
+                <value>rose</value>
+            </list>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="班级" value="001"/>
+                <entry key="学校" value="北京大学"/>
+            </map>
+        </property>
+        <property name="num" value="110"/>
+        <property name="properties">
+            <props>
+                <prop key="driver">com.mysql.jdbc.Driver</prop>
+                <prop key="username">root</prop>
+                <prop key="password">root</prop>
+            </props>
+        </property>
+
+        <property name="set">
+            <set>
+                <value>3.1415</value>
+                <value>1.1273</value>
+            </set>
+
+        </property>
+    </bean>
+
+
 
 
 </beans>

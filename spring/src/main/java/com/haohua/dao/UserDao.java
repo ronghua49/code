@@ -8,6 +8,7 @@ public class UserDao {
     public UserDao(){
         System.out.println("create......");
     }
+
     public void insert(){
         System.out.println("user was create...");
     }
