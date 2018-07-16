@@ -7,7 +7,7 @@ public class ApplicationContextBeanTest {
 
 @Test
     public  void find(){
-    ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+    ApplicationContext context = new ClassPathXmlApplicationContext("src/applicationContext.xml");
     UserDao userDao = (UserDao) context.getBean("userDao");
         userDao.insert();
     }

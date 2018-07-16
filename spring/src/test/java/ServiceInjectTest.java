@@ -38,4 +38,13 @@ public class ServiceInjectTest {
             System.out.println(key+"-->"+value);
         }
     }
+    @Test
+    public void construstorInjectTest(){
+        UserService userService4 = (UserService) context.getBean("userService4");
+        Map<String,Object> map = userService4.getMap();
+        for(Map.Entry entry:map.entrySet()){
+            System.out.println(entry.getKey()+"-->"+entry.getValue());
+        }
+
+    }
 }

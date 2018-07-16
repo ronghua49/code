@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="userDao" class="com.haohua.dao.UserDao" destroy-method="destory" init-method="init" />
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+            xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <bean id="userDao" class="com.haohua.dao.UserDao"/>
     <bean id="user" class="com.haohua.pojo.User" />
     <bean id="userService" class="com.haohua.service.UserService">
         <!-- set注入 方式一-->
@@ -17,7 +20,17 @@
     <bean id="userService2" class="com.haohua.service.UserService">
       <constructor-arg  name="user" ref="user"/>
     </bean>
-    <!--基本数据类型的注入-->
+    <!--构造方法注入-基本数据类型-->
+    <bean id="userService4" class="com.haohua.service.UserService">
+
+        <constructor-arg>
+            <map>
+                <entry key="上海" value="东方蜘蛛"/>
+            </map>
+        </constructor-arg>
+    </bean>
+
+    <!--set方法注入-基本数据类型的注入-->
     <bean id="userService3" class="com.haohua.service.UserService">
         <property name="userDao" ref="userDao"/>
         <property name="user" ref="user"/>
@@ -50,8 +63,25 @@
 
         </property>
     </bean>
-
-
-
-
+    <bean id="apple" class="com.haohua.service.Apple"/>
+    <bean id="huawei" class="com.haohua.service.Huawei"/>
+    <bean id="aopNotify" class="com.haohua.aop.AopNotify"/>
+    <!--aop配置-->
+        <aop:config>
+            <!--依赖通知类-->
+            <aop:aspect ref="aopNotify">
+                <!--标记要切入的目标对象为-->
+                <aop:pointcut id="pointCut" expression="execution(* com.haohua.service..*.*(..))"/>
+                <!--在目标对象调用该方法时的前面 加上前置通知-->
+                <aop:before method="beforeAdvice" pointcut-ref="pointCut"/>
+                <!--后置通知-->
+                <aop:after-returning method="afterAdvice" pointcut-ref="pointCut" />
+                <!--异常通知-->
+                <aop:after-throwing method="exceptionAdvice" pointcut-ref="pointCut"/>
+                <!--最终通知-->
+                <aop:after method="finallyAdvice" pointcut-ref="pointCut"/>
+                <!--环绕通知-->
+               <!-- <aop:around method="aroundAdvice" pointcut-ref="pointCut"/>-->
+            </aop:aspect>
+        </aop:config>
 </beans>

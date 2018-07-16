@@ -36,6 +36,10 @@ public class UserService {
     public UserService(User user){
         this.user = user;
     }
+//构造方法，传入map集合
+    public UserService(Map<String,Object> map){
+        this.map=map;
+    }
 
     public Integer getNum() {
         return num;
