@@ -24,6 +24,8 @@
         <!--跳转值的后缀-->
         <property name="suffix" value=".jsp"/>
     </bean>
+    <!--表示页面可直接访问静态资源-->
+    <mvc:default-servlet-handler/>
 
 </beans>
 
