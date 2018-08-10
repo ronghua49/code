@@ -34,4 +34,5 @@ public interface PartsMapper {
 
     int updateByPrimaryKey(Parts record);
 
+    Parts selectByPartsNo(String partsNo);
 }

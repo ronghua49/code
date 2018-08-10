@@ -4,6 +4,7 @@ package com.haohua.service;    /*
  */
 
 import com.haohua.dao.UserDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -11,13 +12,10 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 @Service
-@Scope
-@Lazy
 public class UserService {
-    @Resource
+    @Autowired
     private UserDao userDao;
     private String name;
-
     public UserDao getUserDao() {
         return userDao;
     }

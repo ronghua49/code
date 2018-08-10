@@ -8,6 +8,7 @@ import com.haohua.erp.entity.Role;
 import com.haohua.erp.exception.ServiceException;
 import com.haohua.erp.service.PremissionService;
 import com.haohua.erp.service.RoleService;
+import com.haohua.erp.shiro.MyShiroFilter;
 import com.haohua.erp.util.JsonResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,10 +23,9 @@ import java.util.Map;
 @RequestMapping("/manage/permission")
 public class PremissionController {
     @Autowired
-    private RoleService roleService;
-    @Autowired
     private PremissionService premissionService;
-
+    @Autowired
+    private MyShiroFilter myShiroFilter;
     @GetMapping
     public String permissionList(Model model){
         List<Permission> permissions = premissionService.findPremissionList();
@@ -43,6 +43,7 @@ public class PremissionController {
     @ResponseBody
     public JsonResponse addPermission(Permission permission){
         premissionService.insertPermission(permission);
+        myShiroFilter.updatePermission();
         return JsonResponse.success();
     }
     @GetMapping("/{permissionId:\\d+}/edit")
@@ -59,14 +60,19 @@ public class PremissionController {
     public JsonResponse editPermission(Permission permission){
         //修改权限
         premissionService.editPermission(permission);
+        myShiroFilter.updatePermission();
         return JsonResponse.success();
     }
     @GetMapping("/{permissionId:\\d+}/del")
     @ResponseBody
     public JsonResponse delPermission(@PathVariable Integer permissionId){
-        System.out.println("hgf");
-        premissionService.delPermission(permissionId);
-        return JsonResponse.success();
+        try{
+            premissionService.delPermission(permissionId);
+            myShiroFilter.updatePermission();
+             return JsonResponse.success();
+        }catch (ServiceException e){
+            return JsonResponse.error(e.getMessage());
+        }
     }
     @GetMapping("/check")
     @ResponseBody

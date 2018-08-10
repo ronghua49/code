@@ -20,7 +20,7 @@
     <!-- =============================================== -->
 
     <jsp:include page="../include/sider.jsp">
-        <jsp:param name="menu" value="role"/>
+        <jsp:param name="menu" value="roles"/>
     </jsp:include>
 
 
@@ -144,9 +144,9 @@
                         $("#saveBtn").attr("disabled","disabled").text("保存中...");
                     },
                     success:function(result){
-                        if(result.message=="success"){
-                            layer.alert("添加成功",{icon:1, time:1000},function () {
-                                window.location.href="/manage/roles";
+                        if(result.state=="success"){
+                            layer.msg("添加成功",{icon:1, time:1000},function () {
+                               window.location.href="/manage/roles"
                             })
                         }
                     },

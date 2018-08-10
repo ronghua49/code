@@ -23,13 +23,13 @@
             <artifactId>junit</artifactId>
             <version>${junit-veriosn}</version>
         </dependency>
-
+<!--spting 容器核心包-->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring-version}</version>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${spring-version}</version>
         </dependency>
-
+<!--spring jdbc-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>

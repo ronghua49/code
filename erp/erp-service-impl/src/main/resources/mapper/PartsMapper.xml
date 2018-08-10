@@ -199,8 +199,16 @@
         </if>
       </where>
     </select>
+    <select id="selectByPartsNo" resultType="com.haohua.erp.entity.Parts">
+      SELECT
+          *
+      FROM
+          parts
+      WHERE
+          parts.parts_no =#{partsNo}
+    </select>
 
-  <update id="updateByExampleSelective" parameterType="map">
+    <update id="updateByExampleSelective" parameterType="map">
     update parts
     <set>
       <if test="record.id != null">

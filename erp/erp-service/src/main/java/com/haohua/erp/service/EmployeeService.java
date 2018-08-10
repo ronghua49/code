@@ -5,6 +5,7 @@ package com.haohua.erp.service;    /*
 
 import com.github.pagehelper.PageInfo;
 import com.haohua.erp.entity.Employee;
+import com.haohua.erp.entity.EmployeeLoginLog;
 
 import java.util.Map;
 
@@ -66,4 +67,10 @@ public interface EmployeeService {
      * @param employee
      */
     void updateEmployee(Employee employee);
+
+    /**
+     * 保存登录日志到数据库
+     * @param employeeLoginLog
+     */
+    void saveLoginLog(EmployeeLoginLog employeeLoginLog);
 }

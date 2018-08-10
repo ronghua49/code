@@ -10,7 +10,6 @@ public class UserDao {
     public void delete(){
         System.out.println("delete.....");
     }
-
     public int save(int age){
         System.out.println("saving...");
         return  age;

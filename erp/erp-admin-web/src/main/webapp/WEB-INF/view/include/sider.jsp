@@ -37,19 +37,19 @@
                 </ul>
             </li>
             <!-- 库存管理 -->
-            <li class="treeview">
+            <li class="treeview ${param.menu == 'parts' ? 'active' : ''}">
                 <a href="#">
-                    <i class="fa fa-home"></i> <span class="${param.menu == 'parts' ? 'active' : ''}">库存管理</span>
+                    <i class="fa fa-home active"></i> <span>库存管理</span>
                     <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="/parts"><i class="fa fa-circle-o"></i>配件管理</a></li>
-                    <li><a href="/type"><i class="fa fa-circle-o"></i>类型管理</a></li>
-                    <li><a href="/parts/new"><i class="fa fa-circle-o"></i>配件入库</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>入库查询</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>出库查询</a></li>
+                    <li class="${param.menu == 'parts' ? 'active' : ''}"><a href="/inventory/parts"><i class="fa fa-circle-o"></i>配件管理</a></li>
+                    <li class="${param.menu == 'type' ? 'active' : ''}"><a href="/inventory/type"><i class="fa fa-circle-o"></i>类型管理</a></li>
+                    <li class="${param.menu == 'partsIn' ? 'active' : ''}"><a href="/inventory/parts/add"><i class="fa fa-circle-o"></i>配件入库</a></li>
+                    <li class="${param.menu == 'inFind' ? 'active' : ''}"><a href="#"><i class="fa fa-circle-o"></i>入库查询</a></li>
+                    <li class="${param.menu == 'outFind' ? 'active' : ''}"><a href="#"><i class="fa fa-circle-o"></i>出库查询</a></li>
                 </ul>
             </li>
             <!-- 结算管理 -->
@@ -78,12 +78,12 @@
                 </ul>
             </li>
 
-
-            <li class="header">系统管理</li>
+s
+            <li class="header active">系统管理</li>
             <!-- 部门员工管理 -->
-            <li><a href="/manage/employee"><i class="fa fa-users"></i> <span class="${param.menu == 'employee' ? 'active' : ''}">员工管理</span></a></li>
-            <li><a href="/manage/roles"><i class="fa fa-user-circle"></i> <span class="${param.menu == 'role' ? 'active' : ''}">角色管理</span></a></li>
-            <li><a href="/manage/permission"><i class="fa fa-gavel"></i> <span class="${param.menu == 'permission' ? 'active' : ''}">权限管理</span></a></li>
+            <li class="${param.menu == 'employee' ? 'active' : ''}"><a href="/manage/employee"><i class="fa fa-users"></i> <span>员工管理</span></a></li>
+            <li  class="${param.menu == 'roles' ? 'active' : ''}"><a href="/manage/roles"><i class="fa fa-user-circle"></i> <span>角色管理</span></a></li>
+            <li class="${param.menu == 'permission' ? 'active' : ''}"><a href="/manage/permission"><i class="fa fa-gavel"></i> <span>权限管理</span></a></li>
         </ul>
     </section>
     <!-- /.sidebar -->

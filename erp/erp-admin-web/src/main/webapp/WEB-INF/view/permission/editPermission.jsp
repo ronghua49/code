@@ -17,7 +17,7 @@
     <!-- =============================================== -->
 
     <jsp:include page="../include/sider.jsp">
-        <jsp:param name="menu" value="manage_permission"/>
+        <jsp:param name="menu" value="permission"/>
     </jsp:include>
 
     <!-- =============================================== -->
@@ -58,8 +58,8 @@
                         <div class="form-group">
                             <label>权限类型</label>
                             <select name="permissionType" class="form-control">
-                                <option value="菜单" ${permission.permissionType == "菜单" ? 'checked' : ''}>菜单</option>
-                                <option value="按钮" ${permission.permissionType == "按钮" ? 'checked' : ''}>按钮</option>
+                                <option value="菜单" ${permission.permissionType == "菜单" ? 'selected' : ''}>菜单</option>
+                                <option value="按钮" ${permission.permissionType == "按钮" ? 'selected' : ''}>按钮</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -143,8 +143,8 @@
                         $("#editBtn").attr("disabled","disabled").text("保存中...");
                     },
                     success:function(result){
-                        if(result.message=="success"){
-                            layer.msg("添加成功", {icon:1, time:1000},function () {
+                        if(result.state=="success"){
+                            layer.msg("修改成功", {icon:1, time:1000},function () {
                                 window.location.href="/manage/permission";
                             });
                         }

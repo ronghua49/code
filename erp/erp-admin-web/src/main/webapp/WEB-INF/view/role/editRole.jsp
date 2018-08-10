@@ -20,7 +20,7 @@
     <!-- =============================================== -->
 
     <jsp:include page="../include/sider.jsp">
-        <jsp:param name="menu" value="manage_roles"/>
+        <jsp:param name="menu" value="roles"/>
     </jsp:include>
 
     <!-- =============================================== -->
@@ -70,10 +70,7 @@
                                         <td>${entry.key.permissionCode}</td>
                                         <td>${entry.key.url}</td>
                                         <td>${entry.key.permissionType}</td>
-                                        <td>
-                                            <a class="btn btn-primary btn-xs" href="" title="编辑"><i class="fa fa-pencil"></i></a>
-                                            <a class="btn btn-danger btn-xs delLink" ref="${entry.key.id}" href="javascript:;" title="删除"><i class="fa fa-trash"></i></a>
-                                        </td>
+
                                     </tr>
                                 </c:forEach>
 
@@ -137,8 +134,8 @@
                         $("#editBtn").attr("disabled","disabled").text("更新中...");
                     },
                     success:function(result){
-                        if(result.message=="success"){
-                            layer.alert("修改成功",{icon:1, time:1000},function () {
+                        if(result.state=="success"){
+                            layer.msg("修改成功",{icon:1, time:1000},function () {
                                 window.location.href="/manage/roles";
                             })
                         }

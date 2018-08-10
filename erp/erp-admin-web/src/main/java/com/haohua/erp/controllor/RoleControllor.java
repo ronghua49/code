@@ -4,19 +4,15 @@ package com.haohua.erp.controllor;    /*
  */
 import com.haohua.erp.entity.Permission;
 import com.haohua.erp.entity.Role;
-import com.haohua.erp.entity.RolePermission;
 import com.haohua.erp.exception.ServiceException;
 import com.haohua.erp.service.PremissionService;
-import com.haohua.erp.service.RolePremissionService;
 import com.haohua.erp.service.RoleService;
+import com.haohua.erp.shiro.MyShiroFilter;
 import com.haohua.erp.util.JsonResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +23,8 @@ public class RoleControllor {
     private RoleService roleService;
     @Autowired
     private PremissionService premissionService;
+    @Autowired
+    private MyShiroFilter shiroFilter;
     @GetMapping
     public String roleList(Model model){
         List<Role> roleList = roleService.findRoleListWithPermission();
@@ -34,9 +32,11 @@ public class RoleControllor {
         return "/role/roleList";
     }
     @GetMapping("/add")
+
     public String addRole(Model model){
         List<Permission> permissionList =premissionService.findPremissionList();
         model.addAttribute("permissionList",permissionList);
+
         return  "role/addRole";
     }
     @PostMapping("/add")
@@ -61,7 +61,6 @@ public class RoleControllor {
             roleService.editRole(role,permissionId);
             return JsonResponse.success();
     }
-
     @GetMapping("/{roleId:\\d+}/del")
     @ResponseBody
     public JsonResponse delRole(@PathVariable Integer roleId){

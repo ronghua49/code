@@ -8,6 +8,8 @@ import java.math.BigDecimal;
  * @author 
  */
 public class Parts implements Serializable {
+    public static final  Integer IN_PARTS=1;
+    public static final  Integer OUT_PARTS=2;
     /**
      * ID
      */
@@ -49,6 +51,7 @@ public class Parts implements Serializable {
      * 进货地址
      */
     private String address;
+    private Integer num;
 
     private static final long serialVersionUID = 1L;
 
@@ -124,6 +127,14 @@ public class Parts implements Serializable {
         this.type = type;
     }
 
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(Integer num) {
+        this.num = num;
+    }
+
     @Override
     public String toString() {
         return "Parts{" +
@@ -136,6 +147,7 @@ public class Parts implements Serializable {
                 ", typeId=" + typeId +
                 ", type=" + type +
                 ", address='" + address + '\'' +
+                ", num=" + num +
                 '}';
     }
 }

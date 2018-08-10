@@ -1,191 +1,64 @@
 package com.haohua.erp.serviceImp;    /*
  * @author  Administrator
- * @date 2018/7/23
+ * @date 2018/8/2
  */
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.haohua.erp.entity.Parts;
-import com.haohua.erp.entity.PartsExample;
-import com.haohua.erp.entity.Type;
-import com.haohua.erp.entity.TypeExample;
-import com.haohua.erp.mapper.PartsMapper;
-import com.haohua.erp.mapper.TypeMapper;
+
+import com.haohua.erp.entity.Car;
+import com.haohua.erp.entity.Customer;
+import com.haohua.erp.entity.CustomerExample;
+import com.haohua.erp.mapper.CarMapper;
+import com.haohua.erp.mapper.CustomerMapper;
 import com.haohua.erp.service.CarService;
-import com.haohua.erp.util.Constant;
-import com.haohua.erp.exception.NotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Map;
 
-/**
- * 汽车服务 业务处理层
- * @author ronghua
- */
 @Service
 public class CarServiceImpl implements CarService {
-   @Autowired
-    private PartsMapper partsMapper;
-   @Autowired
-   private TypeMapper typeMapper;
 
+    private Logger logger = LoggerFactory.getLogger(CarServiceImpl.class);
+    @Autowired
+    private CarMapper carMapper;
+    @Autowired
+    private CustomerMapper customerMapper;
+
+    /**
+     * 根据车牌号查询车辆信息
+     * @param licenseNo 车牌号
+     * @return
+     */
     @Override
-    public Parts findById(Integer id)  {
-        Parts parts = partsMapper.selectByPrimaryKey(id);
-        if (parts!=null){
-             return parts;
+    public Car findCarWithCustomerInfo(String licenseNo) {
+        return carMapper.findCarWithCustomerInfo(licenseNo) ;
+    }
+
+    /**
+     * 根据车辆和车主信息录入
+     * @param car
+     * @param customer
+     */
+    @Override
+    @Transactional(rollbackFor = RuntimeException.class)
+    public void insertInfo(Car car, Customer customer) {
+        // 通过身份证号码查询客户是否存在
+        CustomerExample customerExample = new CustomerExample();
+        customerExample.createCriteria().andIdCardEqualTo(customer.getIdCard());
+        List<Customer> customerList = customerMapper.selectByExample(customerExample);
+        // 如果客户不存在则添加客户信息，获得自动生成的主键
+        Integer customerId=null;
+        if (customerList.isEmpty()){
+            customerMapper.insertSelective(customer);
+            customerId=customer.getId();
         }else {
-            throw new NotFoundException("未找到零部件");
+            customerId = customerList.get(0).getId();
         }
-    }
-    /**
-     * 根据页码和map参数查询 part的分页对象
-     *
-     * @param pageNo 当前页码
-     * @param paramMap 查询part对象的条件
-     * @return part的page对象
-     */
-    @Override
-    public PageInfo<Parts> findWithTypeByPageNoAndMap(Integer pageNo, Map<String, Object> paramMap) {
-            //在执行sql前告诉分页条件
-        PageHelper.startPage(pageNo,Constant.DEFAULT_PAGESIZA);
-            //根据条件查询part的集合
-        List<Parts> partsList = partsMapper.selectWithTypeByParamMap(paramMap);
-            //把分页好的对象集合封装成PageInfo对象
-        PageInfo<Parts> pageInfo = new PageInfo<>(partsList);
-        return pageInfo;
-    }
-
-    /**
-     * 查询所有的type对象
-     *
-     * @return 返回type对象集合
-     */
-    @Override
-    public List<Type> findTypeList() {
-        List<Type> typeList = typeMapper.selectByExample(null);
-        return typeList;
-    }
-
-    /**
-     * 根据表单提交的part对象 新增part
-     *
-     * @param parts 封装的part对象
-     * @return 受影响的行数
-     */
-    @Override
-    public Integer addNewParts(Parts parts) {
-        Integer res = partsMapper.insertSelective(parts);
-        return res;
-    }
-
-    /**
-     * 根据partsId删除parts
-     *
-     * @return 受影响的行数
-     */
-    @Override
-    public Integer delPartsById(Integer partsId) {
-        Integer res = partsMapper.deleteByPrimaryKey(partsId);
-        return res;
-    }
-
-    /**
-     * 根据表单值封装的part对象修改 part
-     *
-     * @param parts 要修改的对象
-     * @return
-     */
-    @Override
-    public Integer editPartsByParts(Parts parts) {
-        int res =partsMapper.updateByPrimaryKeySelective(parts);
-        return res;
-    }
-
-    /**
-     * 查找type的对象 并分页
-     *
-     * @return typelist的page对象
-     */
-    @Override
-    public PageInfo<Type> findTypePage(Integer p) {
-        PageHelper.startPage(p,Constant.DEFAULT_PAGESIZA);
-        List<Type> typeList = findTypeList();
-        return new PageInfo<>(typeList);
-    }
-
-    /**
-     * 根据typeId 删除type
-     *
-     * @param typeId
-     * @return 受影响的行数
-     */
-    @Override
-    public Integer delTypeById(Integer typeId) {
-        return typeMapper.deleteByPrimaryKey(typeId);
-    }
-
-    /**
-     * 根据类型名删除对应类型
-     * @param delName
-     * @return
-     */
-    @Override
-    public Integer delTypeByTypeName(String delName) {
-        TypeExample typeExample = new TypeExample();
-        typeExample.createCriteria().andTypeNameEqualTo(delName);
-        return typeMapper.deleteByExample(typeExample);
-    }
-
-    /**
-     * 根据类型名查找类型
-     *
-     * @param delName
-     * @return
-     */
-    @Override
-    public List<Type> findTypeByTypeName(String delName) {
-        TypeExample typeExample = new TypeExample();
-        typeExample.createCriteria().andTypeNameEqualTo(delName);
-        return typeMapper.selectByExample(typeExample);
-}
-
-    /**
-     * 根据类型id查找partsList集合
-     *
-     * @param id 类型id
-     * @return
-     */
-    @Override
-    public List<Parts> findByTypeId(Integer id) {
-        PartsExample partsExample = new PartsExample();
-        partsExample.createCriteria().andTypeIdEqualTo(id);
-        return partsMapper.selectByExample(partsExample);
-    }
-
-    /**
-     * 根据类型名新增类型
-     *
-     * @param addName 新增的类型名
-     * @return
-     */
-    @Override
-    public Integer addTypeByTypeName(String addName) {
-            Type type = new Type();
-            type.setTypeName(addName);
-            return typeMapper.insert(type);
-    }
-
-    /**
-     * 根据类型修改 类型
-     *
-     * @param type
-     * @return
-     */
-    @Override
-    public Integer editTypeByType(Type type) {
-        return typeMapper.updateByPrimaryKeySelective(type);
+            //根据车主录入车辆信息
+            car.setCustomerId(customerId);
+            carMapper.insertSelective(car);
     }
 
 

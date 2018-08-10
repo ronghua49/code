@@ -27,8 +27,10 @@
                员工管理
             </h1>
             <div class="box-tools pull-right" style="display: inline-block">
-                <button type="button" class="btn btn-box-tool"  title="Collapse" id="addBtn">
+                <shiro:hasPermission name="employee:add">
+                <button type="button" class="btn btn-primary"  title="Collapse" id="addBtn">
                     <i class="fa fa-plus"></i> 添加员工</button>
+                </shiro:hasPermission>
             </div>
         </section>
         <!-- Main content -->
@@ -37,10 +39,10 @@
             <div class="box no-border">
                 <div class="box-body">
                     <form class="form-inline pull-left" id="searchForm" action="">
-                        <input type="text" name="employeeName" placeholder="员工姓名或者电话" class="form-control" value="${param.employeeName}">
+                        <input type="text" name="employeeNameOrTel" placeholder="员工姓名或者电话" class="form-control" value="${param.employeeNameOrTel}">
                         <select class="form-control" name="state" id="state">
                                 <option value="">请选择状态</option>
-                                <option value="0" ${(param.state==0) ? 'selected' : '' } >禁用</option>
+                                <option value="2" ${(param.state==2) ? 'selected' : '' } >禁用</option>
                                 <option value="1" ${(param.state==1) ? 'selected' : '' } >正常</option>
                         </select>
                         <select class="form-control" name="roleId" id="roleIds">
@@ -66,7 +68,7 @@
                             <th>电话</th>
                             <th>录入时间</th>
                             <th>状态</th>
-                            <th>#</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -82,9 +84,15 @@
                                 <td> <fmt:formatDate type="date" value="${employee.createTime}" /></td>
                                 <td>${employee.state eq "1" ? "正常":"禁止"}</td>
                                 <td>
-                                    <a href="/manage/employee/${employee.id}/lock">${employee.state eq "1" ? "禁用":"启用"}</a>
-                                    <a href="/manage/employee/${employee.id}/edit">更新</a>
-                                    <a href="javascript:;" class="del" rel="${employee.id}">删除</a> </td>
+                                    <shiro:hasPermission name="employee:frozen">
+                                    <a class="btn btn-warning btn-xs" href="/manage/employee/${employee.id}/lock"title="${employee.state eq "1" ? "禁用":"启用"}"><i class="${employee.state eq "1" ? "fa fa-unlock":"fa fa-lock"}"></i></a>
+                                    </shiro:hasPermission>
+                                    <shiro:hasPermission name="employee:edit">
+                                    <a class="btn btn-primary btn-xs" href="/manage/employee/${employee.id}/edit" title="更新"><i class="fa fa-edit"></i></a>
+                                    </shiro:hasPermission>
+                                   <shiro:hasPermission name="employee:del">
+                                    <a class="btn btn-danger btn-xs del" href="javascript:;"  rel="${employee.id}" title="删除"><i class="fa fa-trash"></i></a> </td>
+                                    </shiro:hasPermission>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -95,7 +103,7 @@
 
             </div>
             <!-- /.box -->
-
+            <input type="hidden" value="${message}" id="message">
         </section>
         <!-- /.content -->
     </div>
@@ -151,18 +159,22 @@
 
             $('#time').val(start.format('YYYY-MM-DD') + " / " + end.format('YYYY-MM-DD'));
         });
-        var message="${message}"
-        if(message){
-            layer.msg(message);
-        }
+
 
         $(".del").click(function(){
             var employeeId = $(this).attr("rel");
             layer.confirm("are your sure delete this employee?",function () {
                 window.location.href="/manage/employee/"+employeeId+"/del";
             })
-        });
 
+        });
+        var  time = (new Date()).valueOf();
+        var message=$("#message").val();
+        if(message){
+            layer.msg(message,{icon:2,time:1000},function () {
+                     window.location.reload();
+            });
+        }
         $("#addBtn").click(function () {
             window.location.href="/manage/employee/add";
         });

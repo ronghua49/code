@@ -38,7 +38,9 @@
                 <div class="box-header">
                     <h3 class="box-title">权限列表</h3>
                     <div class="box-tools">
+                        <shiro:hasPermission name="permission:add">
                         <a href="/manage/permission/add" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> 新增权限</a>
+                        </shiro:hasPermission>
                     </div>
                 </div>
                 <div class="box-body">
@@ -63,8 +65,12 @@
                                 <td>${permission.url}</td>
                                 <td>${permission.permissionType}</td>
                                 <td>
+                                    <shiro:hasPermission name="permission:edit">
                                     <a class="btn btn-primary btn-xs" href="/manage/permission/${permission.id}/edit" title="编辑"><i class="fa fa-pencil"></i></a>
+                                    </shiro:hasPermission>
+                                    <shiro:hasPermission name="permission:del">
                                     <a class="btn btn-danger btn-xs delLink" rel="${permission.id}" href="javascript:;" title="删除"><i class="fa fa-trash"></i></a>
+                                    </shiro:hasPermission>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -91,12 +97,12 @@
             var id = $(this).attr("rel");
             layer.confirm("确定要删除改权限么？",function(index) {
                 $.get("/manage/permission/" + id + "/del").done(function(res){
-                    if(res.message== "success") {
+                    if(res.state== "success") {
                         layer.msg("删除成功", {icon:2, time:1000},function () {
                             window.parent.location.reload();
                         });
                     } else {
-                        layer.msg(res.message, {icon:2, time:1000});
+                        layer.msg(res.result, {icon:2, time:1500});
                     }
                 }).error(function() {
                     layer.msg("系统异常")

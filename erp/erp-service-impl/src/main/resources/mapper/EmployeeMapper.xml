@@ -187,19 +187,19 @@
     LEFT JOIN employee_role er ON e.id = er.employee_id
     LEFT JOIN role r ON er.role_id = r.id
     <where>
-      <if test="employeeName != null and employeeName!='' ">
+      <if test="employeeName != null and employeeName != '' ">
         and employee_name like concat("%",#{employeeName},"%")
       </if>
-      <if test="employeeTel != null and employeeTel!=''">
+      <if test="employeeTel != null and employeeTel != ''">
         and employee_tel like concat("%",#{employeeTel},"%")
       </if>
-      <if test="state != null and state!=''">
+      <if test="state != null and state != ''">
         and e.state = #{state}
       </if>
-      <if test="employeeId != null and employeeId!=''">
+      <if test="employeeId != null and employeeId != ''">
         and e.id = #{employeeId}
       </if>
-      <if test="roleId != null and roleId!=''">
+      <if test="roleId != null and roleId != ''">
         and e.id in (
         SELECT
         e.id

@@ -122,8 +122,8 @@
                         $("#editBtn").attr("disabled","disabled").text("保存中...");
                     },
                     success:function(result){
-                        if(result.message=="success"){
-                            layer.alert("修改成功",{icon:1, time:1000},function () {
+                        if(result.state=="success"){
+                            layer.msg("修改成功",{icon:1, time:1000},function () {
                                     window.location.href="/manage/employee";
                             })
                         }else {

@@ -54,7 +54,6 @@ public class BookMapperTest {
     bookMapper.insertCard(cardList);
     sqlsession.commit();
 }
-
 @Test
     public void findBookByParams(){
         Map<String,Object>  params = new HashMap<>();

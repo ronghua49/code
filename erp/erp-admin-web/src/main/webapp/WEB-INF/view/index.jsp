@@ -48,11 +48,7 @@
                 <div class="col-xs-8">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" name="remember"
-                            <c:if test="${not empty userTel}">
-                                    checked
-                            </c:if>
-                            > 记住账号
+                            <input type="checkbox" name="remember"> 七日免登陆
                         </label>
                     </div>
                 </div>

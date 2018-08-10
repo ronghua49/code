@@ -92,15 +92,15 @@ public class EmployeeServiceImpl implements EmployeeService {
      */
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
-    public Integer addEmployee(Employee employee,Integer[] roleId) {
+    public Integer addEmployee(Employee employee,Integer[] roleIds) {
+
         //增加事务
         try{
             String password = DigestUtils.md5Hex(employee.getPassword());
             employee.setPassword(password);
             employeeMapper.insertSelective(employee);
             int employeeId = employee.getId();
-            System.out.println(employeeId);
-            for(Integer id:roleId){
+            for(Integer id:roleIds){
                 EmployeeRole employeeRole = new EmployeeRole();
                 employeeRole.setEmployeeId(employeeId);
                 employeeRole.setRoleId(id);
@@ -111,7 +111,6 @@ public class EmployeeServiceImpl implements EmployeeService {
             return 0;
         }
     }
-
     /**
      * 删除员工
      *
@@ -198,6 +197,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void updateEmployee(Employee employee) {
         employeeMapper.updateByPrimaryKeySelective(employee);
+    }
+
+    /**
+     * 保存登录日志到数据库
+     * @param employeeLoginLog
+     */
+    @Override
+    public void saveLoginLog(EmployeeLoginLog employeeLoginLog) {
+        employeeLoginLogMapper.insertSelective(employeeLoginLog);
     }
 
 }

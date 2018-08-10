@@ -15,7 +15,6 @@
     <plugins>
         <plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
     </plugins>
-
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"></transactionManager>
@@ -29,13 +28,13 @@
     </environments>
 
     <mappers>
-      <!--  <mapper resource="mapper/AuthorMapper.xml"/>
+        <mapper resource="mapper/AuthorMapper.xml"/>
         <mapper resource="mapper/BookMapper.xml"/>
         <mapper resource="mapper/MovieMapper.xml"/>
         <mapper resource="mapper/CommentaryMapper.xml"/>
-        <mapper resource="mapper/ReplyMapper.xml"/>-->
-      <mapper class="com.haohua.mapper.MovieMapper"/>
         <mapper resource="mapper/ReplyMapper.xml"/>
+      <!--  <mapper class="com.haohua.mapper.MovieMapper"/>-->
+
     </mappers>
 
 </configuration>

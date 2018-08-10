@@ -10,7 +10,10 @@ import com.haohua.erp.exception.ServiceException;
 import com.haohua.erp.service.EmployeeRoleService;
 import com.haohua.erp.service.EmployeeService;
 import com.haohua.erp.service.RoleService;
+import com.haohua.erp.shiro.MyRealm;
+import com.haohua.erp.shiro.MyShiroFilter;
 import com.haohua.erp.util.JsonResponse;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,15 +33,22 @@ public class EmployeeControllor {
     private EmployeeService employeeService;
     @Autowired
     private RoleService  roleService;
+    @Autowired
+    private MyShiroFilter myShiroFilter;
     @GetMapping
     public String employeeList(@RequestParam(defaultValue = "1",required = false) Integer p,
-                               @RequestParam(required = false) String employeeName,
-                               @RequestParam(required = false) String employeeTel,
+                               @RequestParam(required = false) String employeeNameOrTel,
                                @RequestParam(required = false) Integer roleId,
                                @RequestParam(required = false) Integer state,
                                Model model){
-        System.out.println(state);
         Map<String,Object> paramMap = new HashMap<>();
+        String employeeName=null;
+        String employeeTel=null;
+        if(StringUtils.isNumeric(employeeNameOrTel)){
+            employeeTel=employeeNameOrTel;
+        }else{
+            employeeName=employeeNameOrTel;
+        }
         paramMap.put("employeeName",employeeName);
         paramMap.put("state",state);
         paramMap.put("employeeTel",employeeTel);
@@ -50,7 +60,6 @@ public class EmployeeControllor {
         model.addAttribute("page",page);
         return "employee/employeeList";
     }
-
     @GetMapping("/add")
     public String addEmployee(Model model){
         List<Role> roleList = roleService.findRoleList();
@@ -59,23 +68,23 @@ public class EmployeeControllor {
     }
     @PostMapping("/add")
     @ResponseBody
-    public JsonResponse employeeAdd(Employee employee, Integer[] roleId){
-         Integer res = employeeService.addEmployee(employee,roleId);
+    public JsonResponse employeeAdd(Employee employee, Integer[] roleIds){
+         Integer res = employeeService.addEmployee(employee,roleIds);
             if (res==1){
+                myShiroFilter.updatePermission();
                 return JsonResponse.success();
             }
             return JsonResponse.error();
     }
-
     @GetMapping("/{employeeId:\\d+}/del")
     public String delEmployee(@PathVariable Integer employeeId, RedirectAttributes redirectAttributes){
         Integer res = employeeService.delEmployee(employeeId);
         if (res==1){
             redirectAttributes.addFlashAttribute("message","删除成功！");
         }else {
-            redirectAttributes.addFlashAttribute("message","删除失败！");
+            redirectAttributes.addAttribute("message","删除失败！");
         }
-        return "redirect:/employee";
+        return "redirect:/manage/employee";
     }
     @GetMapping("/{employeeId:\\d+}/edit")
     public String editEmployee(@PathVariable Integer employeeId,Model model ){
@@ -92,6 +101,7 @@ public class EmployeeControllor {
     public JsonResponse employeeEdit(Employee employee,Integer[] roleIds){
         try{
             employeeService.editEmployee(employee,roleIds);
+            myShiroFilter.updatePermission();
             return JsonResponse.success();
         }catch (Exception e){
             e.printStackTrace();
@@ -103,7 +113,6 @@ public class EmployeeControllor {
     @ResponseBody
     public boolean check(@RequestParam(required = false) Integer employeeId,
                          @RequestParam String  employeeTel){
-
             Employee employee = employeeService.findByTel(employeeTel);
           if (employee==null){
               return true;
@@ -113,15 +122,14 @@ public class EmployeeControllor {
           }
           return false;
     }
-
     @RequestMapping("/{employeeId:\\d+}/lock")
     public String lock(@PathVariable Integer employeeId){
         Employee employee = employeeService.findById(employeeId);
-        if (employee.getState().equals(1)){
-            employee.setState(0);
+        if (employee.getState().equals(Employee.NORMAL_STATE)){
+            employee.setState(Employee.PROHIBIT_STATE);
             employeeService.updateEmployee(employee);
         }else {
-            employee.setState(1);
+            employee.setState(Employee.NORMAL_STATE);
             employeeService.updateEmployee(employee);
         }
         return "redirect:/manage/employee";

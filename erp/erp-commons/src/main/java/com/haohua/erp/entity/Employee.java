@@ -16,7 +16,7 @@ public class Employee implements Serializable {
      */
     private Integer id;
 
-    private Integer employeeTel;
+    private String employeeTel;
 
     /**
      * 员工姓名
@@ -50,11 +50,11 @@ public class Employee implements Serializable {
         this.id = id;
     }
 
-    public Integer getEmployeeTel() {
+    public String getEmployeeTel() {
         return employeeTel;
     }
 
-    public void setEmployeeTel(Integer employeeTel) {
+    public void setEmployeeTel(String employeeTel) {
         this.employeeTel = employeeTel;
     }
 

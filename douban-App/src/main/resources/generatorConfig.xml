@@ -30,6 +30,7 @@
         <javaClientGenerator type="XMLMAPPER"
                              targetPackage="com.haohua.mapper"
                              targetProject="src/main/java"/>
+        <!--要映射的表名-->
         <table tableName="t_reply" domainObjectName="Reply" enableSelectByExample="true"/>
     </context>
 </generatorConfiguration>

@@ -58,6 +58,7 @@
                     <uriEncoding>UTF-8</uriEncoding>
                 </configuration>
             </plugin>
+
             <!-- 编译插件 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

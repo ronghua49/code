@@ -17,7 +17,7 @@
     <!-- =============================================== -->
 
     <jsp:include page="../include/sider.jsp">
-        <jsp:param name="menu" value="manage_permission"/>
+        <jsp:param name="menu" value="permission"/>
     </jsp:include>
 
     <!-- =============================================== -->
@@ -141,7 +141,7 @@
                         $("#saveBtn").attr("disabled","disabled").text("保存中...");
                     },
                     success:function(result){
-                        if(result.message=="success"){
+                        if(result.state=="success"){
                             layer.msg("添加成功", {icon:1, time:1000},function () {
                                 window.location.href="/manage/permission";
                             });

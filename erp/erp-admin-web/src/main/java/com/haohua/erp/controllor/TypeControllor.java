@@ -5,37 +5,35 @@ package com.haohua.erp.controllor;    /*
 import com.github.pagehelper.PageInfo;
 import com.haohua.erp.entity.Parts;
 import com.haohua.erp.entity.Type;
-import com.haohua.erp.serviceImp.CarServiceImpl;
+import com.haohua.erp.serviceImp.PartServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
 /**
  * parts类型的增删改查
  */
 @Controller
-@RequestMapping("/type")
+@RequestMapping("/inventory/type")
 public class TypeControllor {
     @Autowired
-    private CarServiceImpl carServiceImpl;
+    private PartServiceImpl partserviceImpl;
     @GetMapping()
     public String addType(@RequestParam(defaultValue = "1",required = false) Integer p, Model model){
 
-        PageInfo<Type> page =carServiceImpl.findTypePage(p);
+        PageInfo<Type> page =partserviceImpl.findTypePage(p);
         model.addAttribute("page",page);
         return "type/typeManage";
     }
     @ResponseBody
     @GetMapping("/del/check")
     public boolean checkDelTypeName(String delName){
-       List<Type> typeList = carServiceImpl.findTypeByTypeName(delName);
+       List<Type> typeList = partserviceImpl.findTypeByTypeName(delName);
         //根据类型查找零件
        if(!typeList.isEmpty()){
             Type type = (Type) typeList.toArray()[0];
-            List<Parts> partsList = carServiceImpl.findByTypeId(type.getId());
+            List<Parts> partsList = partserviceImpl.findByTypeId(type.getId());
             if (!partsList.isEmpty()){
                 return false;
             }else{return true;}
@@ -46,15 +44,13 @@ public class TypeControllor {
     @ResponseBody
     @PostMapping("/del")
     public Integer delType( String delName){
-        System.out.println(delName);
-        Integer res = carServiceImpl.delTypeByTypeName(delName);
-        return  res;
+        return  partserviceImpl.delTypeByTypeName(delName);
     }
 
     @ResponseBody
     @GetMapping("/add/check")
     public boolean checkAddTypeName(String addName){
-        List<Type> typeList = carServiceImpl.findTypeByTypeName(addName);
+        List<Type> typeList = partserviceImpl.findTypeByTypeName(addName);
         if(!typeList.isEmpty()){
             return false;
         }
@@ -63,14 +59,14 @@ public class TypeControllor {
     @ResponseBody
     @PostMapping("/add")
     public Integer addType( String addName){
-        Integer res = carServiceImpl.addTypeByTypeName(addName);
+        Integer res = partserviceImpl.addTypeByTypeName(addName);
         return  res;
     }
 
     @ResponseBody
     @GetMapping("/edit/check")
     public boolean checkEditTypeName(String editName,int typeId ){
-        List<Type> typeList = carServiceImpl.findTypeByTypeName(editName);
+        List<Type> typeList = partserviceImpl.findTypeByTypeName(editName);
         Type type = (Type) typeList.toArray()[0];
         if(type!=null&&typeId!=type.getId()){
             return false;
@@ -83,7 +79,7 @@ public class TypeControllor {
        Type type = new Type();
        type.setId(editTypeId);
        type.setTypeName(editName);
-        Integer res = carServiceImpl.editTypeByType(type);
+        Integer res = partserviceImpl.editTypeByType(type);
         return  res;
     }
 }

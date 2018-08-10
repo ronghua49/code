@@ -153,7 +153,7 @@ public class RoleServiceImp implements RoleService {
         RoleExample roleExample = new RoleExample();
         roleExample.createCriteria().andRoleNameEqualTo(roleName);
         List<Role> roleList = roleMapper.selectByExample(roleExample);
-        if (roleList!=null){
+        if (!roleList.isEmpty()){
             return  roleList.get(0);
         }
         return  null;

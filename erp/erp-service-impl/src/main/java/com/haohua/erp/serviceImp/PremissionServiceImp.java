@@ -126,6 +126,7 @@ public class PremissionServiceImp implements PremissionService {
 
     /**
      * 根据roleid查询对应的权限和该权限对应的所有父权限
+     * 页面回显
      * @param roleId
      * @return
      */

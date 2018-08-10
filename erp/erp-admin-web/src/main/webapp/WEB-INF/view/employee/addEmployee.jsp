@@ -99,6 +99,7 @@
         $("#addBtn").click(function () {
             $("#addForm").submit();
         });
+
         $("#addForm").validate({
             errorElement:"span",
             errorClass:"text-danger",
@@ -136,9 +137,8 @@
                         $("#addBtn").attr("disabled","disabled").text("保存中...");
                     },
                     success:function(result){
-                        console.log (result)
                         if(result.res!=0){
-                            layer.alert("添加成功",function () {
+                            layer.msg("添加成功",{icon:1,time:1000},function () {
                                 window.location.href="/manage/employee";
                             })
                         }

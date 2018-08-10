@@ -11,9 +11,7 @@
     <title>首页</title>
 </head>
 <body>
-
-
-    <h4>注册成功 名字为${username} 地址为${address}</h4>
+    <h4>注册成功 名字为${param.username} 地址为${param.address}</h4>
     <p>静态资源发起的请求自动显示</p>
     <img src="/static/4.png" alt="图片">
 </body>

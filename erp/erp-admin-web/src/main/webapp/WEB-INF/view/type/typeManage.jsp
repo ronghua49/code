@@ -27,8 +27,10 @@
             <h1 style="display: inline-block">
                 零件类型管理
             </h1>
+            <shiro:hasPermission name="type:add">
             <a href="javascript:;" class="btn btn-primary pull-right" data-toggle="modal"
                data-target="#addModal">新增类型</a>
+            </shiro:hasPermission>
         </section>
         <!-- Main content -->
         <section class="content">
@@ -48,9 +50,14 @@
                             <tr>
                                 <td>${type.id}</td>
                                 <td>${type.typeName}</td>
-                                <td><a href="javascript:;"rel="${type.id}" typeName="${type.typeName}"
+                                <td>
+                                    <shiro:hasPermission name="type:edit">
+                                    <a href="javascript:;"rel="${type.id}" typeName="${type.typeName}"
                                        data-toggle="modal" data-target="#updateModal" class="edit">更新</a>
+                                    </shiro:hasPermission>
+                                    <shiro:hasPermission name="type:del">
                                     <a href="javascript:;" class="del" rel="${type.id}">删除</a> </td>
+                                    </shiro:hasPermission>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -141,14 +148,16 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">类型名称:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="delType" name="delName"
+                                <input type="text" class="form-control" id="delTypeName" name="delName"
                                        placeholder="请输入要删除的类型名称">
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
+
                     <button class="btn btn-primary pull-left" id="delBtn">删除</button>
+
                     <button class="btn btn-default pull-left" data-dismiss="modal">取消</button>
                 </div>
             </div>
@@ -166,7 +175,7 @@
     $(function() {
         $("#pagination").twbsPagination({
             totalPages : "${page.pages}",
-            visiblePages : 3,
+            visiblePages : 6,
             href : "/car/type?p={{number}}",
             first : "首页",
             prev : "上一页",
@@ -193,7 +202,7 @@
             rules:{
                 delName : {
                     required : true,
-                    remote:"/type/del/check"
+                    remote:"/inventory/type/del/check"
                 }
             },
             messages:{
@@ -204,13 +213,17 @@
             },
             submitHandler:function(){
                 $.ajax({
-                    url:"/type/del",
+                    url:"/inventory/type/del",
                     type:"post",
-                    data:{"delName":$("#delType").val()},
+                    data:$("#delForm").serialize(),/*{"delName":$("#delTypeName").val()},*/
                     success:function(res){
-                        if (res!=0){
-                            layer.alert("删除成功！",function () {
+                        if (res == 1){
+                            layer.msg("删除成功！",{icon:1,time:1000},function () {
                                window.parent.location.reload();
+                            });
+                        }else{
+                            layer.msg("删除失败！",{icon:2,time:1000},function () {
+                                window.parent.location.reload();
                             });
                         }
                     },
@@ -232,7 +245,7 @@
             rules:{
                 addName : {
                     required : true,
-                    remote:"/type/add/check"
+                    remote:"/inventory/type/add/check"
                 }
             },
             messages:{
@@ -243,12 +256,12 @@
             },
             submitHandler:function(){
                 $.ajax({
-                    url:"/type/add",
+                    url:"/inventory/type/add",
                     type:"post",
                     data:$("#addForm").serialize(),
                     success:function(res){
                         if (res!=0){
-                            layer.alert("新增成功！",function () {
+                            layer.msg("新增成功！",{icon:1,time:1000},function () {
                                 window.parent.location.reload();
                             });
                         }
@@ -280,7 +293,7 @@
                 rules:{
                     editName : {
                         required : true,
-                        remote:"/type/edit/check?typeId="+typeId//修改节点类型时验证，需加上当前typeid
+                        remote:"/inventory/type/edit/check?typeId="+typeId//修改节点类型时验证，需加上当前typeid
                     }
                 },
                 messages:{
@@ -291,12 +304,12 @@
                 },
                 submitHandler:function(){
                     $.ajax({
-                        url:"/type/edit",
+                        url:"/inventory/type/edit",
                         type:"post",
                         data:$("#editForm").serialize(),
                         success:function(res){
                             if (res!=0){
-                               layer.alert("修改成功！",function () {
+                               layer.msg("修改成功！",{icon:1,time:1000},function () {
                                    window.parent.location.reload();
                                });
                             }
