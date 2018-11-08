@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>订单</title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+               订单
+            </h1>
+        </section>
+        <!-- Main content -->
+        <section class="content">
+         <div class="box">
+			<div class="box-body">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>订单id</th>
+							<th>金额</th>
+							<th>状态</th>
+							<th>创建时间</th>
+							<th>汽车id</th>
+							<th>服务id</th>
+							<th>状态名</th>
+						</tr>
+					</thead>
+					<tbody>
+						<th:block th:each="order:${orderList}">
+							<tr>
+								<td th:text="${order.id}"></td>
+								<td th:text="${order.orderMoney}"></td>
+								<td th:text="${order.state}"></td>
+								<td th:text="${order.createTime}"></td>
+								<td th:text="${order.carId}"></td>
+								<td th:text="${order.serviceTypeId}"></td>
+								<td th:text="${order.stateName}"></td>
+							</tr>
+						</th:block>
+					</tbody>
+				</table>
+				<ul id="pagination" class="pagination pull-right"></ul>
+			</div>
+		</div>
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <script>
+       
+    </script>
+</body>
+
+</html>

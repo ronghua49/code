@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+<div layout:fragment="content">
+	<h1 th:text="${message}"></h1>
+	<th:block th:each="dog:${dogList}">
+		<tr>
+			<td th:text="${dog.id}"></td>
+			<td th:text="${dog.name}"></td>
+		</tr><br/>
+	</th:block>
+</div>
+	
+</body>
+</html>
