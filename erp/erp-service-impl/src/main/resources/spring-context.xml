@@ -48,7 +48,10 @@
     <tx:annotation-driven/>
     <!--开启自动扫描注解-->
     <context:component-scan base-package="com.haohua.erp">
-        <!--只扫描controller-->
+        <!--排除扫描controller-->
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
+
+    <import resource="spring-dubbo-service.xml"/>
+    <import resource="spring-jms-queue.xml"/>
 </beans>

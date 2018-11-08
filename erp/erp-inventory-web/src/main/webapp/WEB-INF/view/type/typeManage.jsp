@@ -8,14 +8,14 @@
     <title>车管家ERP-类型管理</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <%@ include file="../include/css.jsp" %>
+    <%@ include file="../../../../../../../erp-admin-web/src/main/webapp/WEB-INF/view/include/css.jsp" %>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
 
-    <%@ include file="../include/header.jsp" %>
-    <jsp:include page="../include/sider.jsp">
+    <%@ include file="../../../../../../../erp-admin-web/src/main/webapp/WEB-INF/view/include/header.jsp" %>
+    <jsp:include page="../../../../../../../erp-admin-web/src/main/webapp/WEB-INF/view/include/sider.jsp">
         <jsp:param name="menu" value="parts"/>
     </jsp:include>
     <!-- =============================================== -->
@@ -167,10 +167,10 @@
     </div>
     <!-- /.modal -->
     <!-- 底部 -->
-    <%@ include file="../include/footer.jsp" %>
+    <%@ include file="../../../../../../../erp-admin-web/src/main/webapp/WEB-INF/view/include/footer.jsp" %>
 </div>
 
-<%@ include file="../include/js.jsp" %>
+<%@ include file="../../../../../../../erp-admin-web/src/main/webapp/WEB-INF/view/include/js.jsp" %>
 <script>
     $(function() {
         $("#pagination").twbsPagination({
