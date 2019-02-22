@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <!--读取配置文件-->
+    <context:property-placeholder location="classpath:config.properties"/>
+
+    <!--数据源的管理和赋值-->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.name}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!--别名的赋值-->
+        <property name="typeAliasesPackage" value="com.haohua.entity"/>
+        <!--Mapper.xml文件位置的赋值-->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+
+        <!--<property name="configLocation" value="classpath:mybatis-context/spring-context.xml"/>-->
+        <!--为属性Configuration 类中的其他属性赋值-->
+        <property name="configuration">
+            <bean class="org.apache.ibatis.session.Configuration">
+                <property name="mapUnderscoreToCamelCase" value="true"/>
+            </bean>
+        </property>
+    </bean>
+
+    <!--自动扫描 mapper接口  生成动态代理对象并放入容器-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.haohua.mapper"/>
+    </bean>
+
+    <!--注解的自动扫描开启-->
+    <context:component-scan base-package="com.haohua"/>
+    <!--事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--开启给予注解的事务-->
+    <tx:annotation-driven/>
+
+</beans>
