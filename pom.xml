@@ -39,12 +39,13 @@
 		</dependency>
 		<!-- 再次声明，此SDK需要自行下载，打入本地仓库或者私服！！！！-->
 		<!-- 支付宝 SDK(项目中的支付宝SDk需要自行去官网下载打入本地仓库或者私服)-->
-		<!-- 项目中的支付宝SDk需要自行去官网下载打入本地仓库或者私服，提供下载地址：https://pan.baidu.com/s/1B2_uyrz2uKN1Z_Ivbv7lgw -->
+		<!-- 项目中的支付宝SDk需要自行去官网下载打入本地仓库或者私服，提供下载地址：http://p.tb.cn/rmsportal_6680_F2FPay_Demo_Java.zip -->
 		<dependency>
-		    <groupId>vip.52itstyle</groupId>
-		    <artifactId>alipay-trade-sdk</artifactId>
-		    <version>1.0.0</version>
+			<groupId>com.alipay</groupId>
+			<artifactId>alipay-trade-sdk</artifactId>
+			<version>20161215</version>
 		</dependency>
+
 		<!-- 官方SDK  https://mvnrepository.com/artifact/com.alipay.sdk/alipay-sdk-java -->
 		<dependency>
 			<groupId>com.alipay.sdk</groupId>
