@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xyjsoft.syspay.dao.SysPayMapper">
+
+  <resultMap id="BaseResultMap" type="com.xyjsoft.syspay.model.SysPay">
+	<id column="id" jdbcType="BIGINT" property="id" />
+	<result column="wxAppId" jdbcType="VARCHAR" property="wxappid" />
+	<result column="wxAppsecret" jdbcType="VARCHAR" property="wxappsecret" />
+	<result column="mchId" jdbcType="VARCHAR" property="mchid" />
+	<result column="ipspbillCreateIp" jdbcType="VARCHAR" property="ipspbillcreateip" />
+	<result column="wx_KpiKey" jdbcType="VARCHAR" property="wxKpikey" />
+	<result column="app_Name" jdbcType="VARCHAR" property="appName" />
+	<result column="zfb_PId" jdbcType="VARCHAR" property="zfbPid" />
+	<result column="zfb_AppId" jdbcType="VARCHAR" property="zfbAppid" />
+	<result column="private_key" jdbcType="VARCHAR" property="privateKey" />
+	<result column="public_key" jdbcType="VARCHAR" property="publicKey" />
+	<result column="alipay_public_key" jdbcType="VARCHAR" property="alipayPublicKey" />
+	<result column="notifyUrl" jdbcType="VARCHAR" property="notifyUrl" />
+  </resultMap>
+  
+  <insert id="add" parameterType="com.xyjsoft.syspay.model.SysPay">
+    insert into sys_pay
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="wxappid != null">
+        wxAppId,
+      </if>
+      <if test="wxappsecret != null">
+        wxAppsecret,
+      </if>
+      <if test="mchid != null">
+        mchId,
+      </if>
+      <if test="ipspbillcreateip != null">
+        ipspbillCreateIp,
+      </if>
+      <if test="wxKpikey != null">
+        wx_KpiKey,
+      </if>
+      <if test="appName != null">
+        app_Name,
+      </if>
+      <if test="zfbPid != null">
+        zfb_PId,
+      </if>
+      <if test="zfbAppid != null">
+        zfb_AppId,
+      </if>
+      <if test="privateKey != null">
+        private_key,
+      </if>
+      <if test="publicKey != null">
+        public_key,
+      </if>
+      <if test="alipayPublicKey != null">
+        alipay_public_key,
+      </if>
+      <if test="notifyUrl != null">
+        notifyUrl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="wxappid != null">
+        #{wxappid,jdbcType=VARCHAR},
+      </if>
+      <if test="wxappsecret != null">
+        #{wxappsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="mchid != null">
+        #{mchid,jdbcType=VARCHAR},
+      </if>
+      <if test="ipspbillcreateip != null">
+        #{ipspbillcreateip,jdbcType=VARCHAR},
+      </if>
+      <if test="wxKpikey != null">
+        #{wxKpikey,jdbcType=VARCHAR},
+      </if>
+      <if test="appName != null">
+        #{appName,jdbcType=VARCHAR},
+      </if>
+      <if test="zfbPid != null">
+        #{zfbPid,jdbcType=VARCHAR},
+      </if>
+      <if test="zfbAppid != null">
+        #{zfbAppid,jdbcType=VARCHAR},
+      </if>
+      <if test="privateKey != null">
+        #{privateKey,jdbcType=VARCHAR},
+      </if>
+      <if test="publicKey != null">
+        #{publicKey,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayPublicKey != null">
+        #{alipayPublicKey,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyUrl != null">
+        #{notifyUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <delete id="delete" parameterType="java.lang.Long">
+    delete from sys_pay
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <update id="update" parameterType="com.xyjsoft.syspay.model.SysPay">
+    update sys_pay
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      <if test="wxappid != null">
+        wxAppId = #{wxappid,jdbcType=VARCHAR},
+      </if>
+      <if test="wxappsecret != null">
+        wxAppsecret = #{wxappsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="mchid != null">
+        mchId = #{mchid,jdbcType=VARCHAR},
+      </if>
+      <if test="ipspbillcreateip != null">
+        ipspbillCreateIp = #{ipspbillcreateip,jdbcType=VARCHAR},
+      </if>
+      <if test="wxKpikey != null">
+        wx_KpiKey = #{wxKpikey,jdbcType=VARCHAR},
+      </if>
+      <if test="appName != null">
+        app_Name = #{appName,jdbcType=VARCHAR},
+      </if>
+      <if test="zfbPid != null">
+        zfb_PId = #{zfbPid,jdbcType=VARCHAR},
+      </if>
+      <if test="zfbAppid != null">
+        zfb_AppId = #{zfbAppid,jdbcType=VARCHAR},
+      </if>
+      <if test="privateKey != null">
+        private_key = #{privateKey,jdbcType=VARCHAR},
+      </if>
+      <if test="publicKey != null">
+        public_key = #{publicKey,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayPublicKey != null">
+        alipay_public_key = #{alipayPublicKey,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyUrl != null">
+        notifyUrl = #{notifyUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="findById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select * from sys_pay
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <select id="get" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select * from sys_pay
+  </select>
+  
+  <select id="findPage" resultMap="BaseResultMap">
+    select * from sys_pay
+  </select>
+
+  <select id="query" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT * FROM sys_pay
+		<where>
+			<if test="whereSql!=null">
+				${whereSql}
+			</if>
+		</where>
+		<if test="orderBySql!=null">
+			ORDER BY ${orderBySql}
+		</if>
+		<if test="orderBySql==null">
+			ORDER BY id DESC
+		</if>
+	</select>
+  
+</mapper>

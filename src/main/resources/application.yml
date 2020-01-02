@@ -1,0 +1,107 @@
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    min-spare-threads: 30
+  port: 7003
+spring:
+  application:
+    name: xyj-syspay
+  datasource:
+    name: druidDataSource
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://49.4.64.158:3306/xyj-base-m2?useUnicode=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&characterEncoding=utf-8&serverTimezone=CTT
+      username: root
+      password: xyjsoft
+      filters: stat,wall,log4j,config
+      max-active: 100
+      initial-size: 1
+      max-wait: 60000
+      min-idle: 1
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: select 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 50
+      max-pool-prepared-statement-per-connection-size: 20
+      
+  redis:
+    host: 49.4.64.158
+    port: 6379
+    password: xyjsoft-admin_110_for-xym
+    jedis:
+      pool:
+          maxActive: 100
+          maxIdle: 50
+          minIdle: 5
+          maxWait: 3000
+      
+logging:
+     level:
+         com.xyjsoft.syspay.dao.* : debug
+eureka:
+  client: #瀹㈡埛绔敞鍐岃繘eureka鏈嶅姟鍒楄〃鍐�
+    #表示eureka client间隔多久去拉取服务器注册信息,默认为30秒
+    registry-fetch-interval-seconds: 30
+    service-url:
+      defaultZone: http://192.168.3.111:7000/eureka/
+  instance:
+    ip-address: 192.168.3.208 #强制指定IP地址，默认会获取本机的IP地址
+    instance-id: 192.168.3.208:${server.port}
+    prefer-ip-address: true
+  boot:
+    admin:
+      client:
+        url: "http://192.168.3.111:8000"
+#feign客户端启动hystrix断路保护
+feign:
+  hystrix: 
+    enabled: true  
+ 
+ 
+ribbon:
+  ReadTimeout: 120000  #处理超时时间 默认5秒
+  ConnectTimeout: 120000 #连接超时时间 默认2秒
+#  MaxAutoRetries: 0
+#  MaxAutoRetriesNextServer: 1
+ 
+ 
+hystrix:
+  command: 
+      default:
+        execution:
+          isolation:
+            thread:
+              timeoutInMilliseconds: 120000 #断路切换超时
+# 开放健康检查接口
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+# pagehelper   
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+    
+swagger:
+  info:
+    description: 讯宜捷平台
+    title: 讯宜捷数据中心
+    author: admin
+  #加入swagger验证，外网使用
+  basic:
+    enable: false
+    username: xyj
+    password: xyj
+    

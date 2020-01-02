@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: net.sourceforge:barbecue:1.0.6d">
+    <CLASSES>
+      <root url="jar://D:/repository/mavenRepository/normal_repository/net/sourceforge/barbecue/1.0.6d/barbecue-1.0.6d.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://D:/repository/mavenRepository/normal_repository/net/sourceforge/barbecue/1.0.6d/barbecue-1.0.6d-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://D:/repository/mavenRepository/normal_repository/net/sourceforge/barbecue/1.0.6d/barbecue-1.0.6d-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xyjsoft.syspay.dao.SysPayRecordMapper">
+
+  <resultMap id="BaseResultMap" type="com.xyjsoft.syspay.model.SysPayRecord">
+	<id column="id" jdbcType="BIGINT" property="id" />
+	<result column="czdate" jdbcType="TIMESTAMP" property="czdate" />
+	<result column="czprice" jdbcType="BIGINT" property="czprice" />
+	<result column="prepayId" jdbcType="VARCHAR" property="prepayid" />
+	<result column="codeState" jdbcType="VARCHAR" property="codestate" />
+	<result column="memo" jdbcType="VARCHAR" property="memo" />
+	<result column="isDispose" jdbcType="VARCHAR" property="isdispose" />
+	<result column="payMent" jdbcType="VARCHAR" property="payment" />
+	<result column="fkdate" jdbcType="TIMESTAMP" property="fkdate" />
+	<result column="thirdcode" jdbcType="VARCHAR" property="thirdcode" />
+	<result column="tkmoney" jdbcType="BIGINT" property="tkmoney" />
+	<result column="lasttkdate" jdbcType="TIMESTAMP" property="lasttkdate" />
+	<result column="ywtype" jdbcType="VARCHAR" property="ywtype" />
+  </resultMap>
+  
+  <insert id="add" parameterType="com.xyjsoft.syspay.model.SysPayRecord" useGeneratedKeys="true" keyProperty="id">
+    insert into sys_pay_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="czdate != null">
+        czdate,
+      </if>
+      <if test="czprice != null">
+        czprice,
+      </if>
+      <if test="prepayid != null">
+        prepayId,
+      </if>
+      <if test="codestate != null">
+        codeState,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="isdispose != null">
+        isDispose,
+      </if>
+      <if test="payment != null">
+        payMent,
+      </if>
+      <if test="fkdate != null">
+        fkdate,
+      </if>
+      <if test="thirdcode != null">
+        thirdcode,
+      </if>
+      <if test="tkmoney != null">
+        tkmoney,
+      </if>
+      <if test="lasttkdate != null">
+        lasttkdate,
+      </if>
+      <if test="ywtype != null">
+        ywtype,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="czdate != null">
+        #{czdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="czprice != null">
+        #{czprice,jdbcType=BIGINT},
+      </if>
+      <if test="prepayid != null">
+        #{prepayid,jdbcType=VARCHAR},
+      </if>
+      <if test="codestate != null">
+        #{codestate,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="isdispose != null">
+        #{isdispose,jdbcType=VARCHAR},
+      </if>
+      <if test="payment != null">
+        #{payment,jdbcType=VARCHAR},
+      </if>
+      <if test="fkdate != null">
+        #{fkdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="thirdcode != null">
+        #{thirdcode,jdbcType=VARCHAR},
+      </if>
+      <if test="tkmoney != null">
+        #{tkmoney,jdbcType=BIGINT},
+      </if>
+      <if test="lasttkdate != null">
+        #{lasttkdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ywtype != null">
+        #{ywtype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <delete id="delete" parameterType="java.lang.Long">
+    delete from sys_pay_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <update id="update" parameterType="com.xyjsoft.syspay.model.SysPayRecord">
+    update sys_pay_record
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      <if test="czdate != null">
+        czdate = #{czdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="czprice != null">
+        czprice = #{czprice,jdbcType=BIGINT},
+      </if>
+      <if test="prepayid != null">
+        prepayId = #{prepayid,jdbcType=VARCHAR},
+      </if>
+      <if test="codestate != null">
+        codeState = #{codestate,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="isdispose != null">
+        isDispose = #{isdispose,jdbcType=VARCHAR},
+      </if>
+      <if test="payment != null">
+        payMent = #{payment,jdbcType=VARCHAR},
+      </if>
+      <if test="fkdate != null">
+        fkdate = #{fkdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="thirdcode != null">
+        thirdcode = #{thirdcode,jdbcType=VARCHAR},
+      </if>
+      <if test="tkmoney != null">
+        tkmoney = #{tkmoney,jdbcType=BIGINT},
+      </if>
+      <if test="lasttkdate != null">
+        lasttkdate = #{lasttkdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ywtype != null">
+        ywtype = #{ywtype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="findById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select * from sys_pay_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <select id="findPage" resultMap="BaseResultMap">
+    select * from sys_pay_record
+  </select>
+  
+  <select id="findByCode" resultMap="BaseResultMap">
+    select * from sys_pay_record where prepayId = #{arg0,jdbcType=BIGINT}
+  </select>
+
+  <select id="query" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT * FROM sys_pay_record
+		<where>
+			<if test="whereSql!=null">
+				${whereSql}
+			</if>
+		</where>
+		<if test="orderBySql!=null">
+			ORDER BY ${orderBySql}
+		</if>
+		<if test="orderBySql==null">
+			ORDER BY id DESC
+		</if>
+	</select>
+  
+</mapper>
