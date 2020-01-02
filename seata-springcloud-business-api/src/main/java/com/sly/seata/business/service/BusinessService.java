@@ -17,7 +17,6 @@ import com.sly.seata.business.service.hystrix.BusinessServiceHystrixImpl;
  */
 @FeignClient(name = "seata-springcloud-business", fallback = BusinessServiceHystrixImpl.class)
 public interface BusinessService {
-
 	/**
 	 * 购买
 	 * 
