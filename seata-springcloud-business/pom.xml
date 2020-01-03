@@ -61,6 +61,12 @@
             <version>0.6.1</version>
         </dependency>
 
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+		</dependency>
+
+
 		<!-- 测试开发相关 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

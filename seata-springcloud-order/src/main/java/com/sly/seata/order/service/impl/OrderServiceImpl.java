@@ -36,7 +36,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public Map<String, Object> insert(@RequestBody Order order) {
 		System.out.println(RootContext.getXID());
-		
+		int i = 10/0;
 		orderMapper.insert(order);
 		Map<String, Object> result = new HashMap<>(16);
 		result.put("status", 200);

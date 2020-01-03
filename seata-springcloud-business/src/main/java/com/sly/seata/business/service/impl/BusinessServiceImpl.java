@@ -9,6 +9,8 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,15 +26,14 @@ import com.sly.seata.storage.service.StorageService;
 
 import io.seata.core.context.RootContext;
 import io.seata.spring.annotation.GlobalTransactional;
-
 /**
  * 业务service实现
  * 
  * @author sly
  * @time 2019年6月12日
  */
-@RestController
-public class BusinessServiceImpl implements BusinessService {
+@Service
+public class BusinessServiceImpl {
 	private static final Logger LOGGER = LoggerFactory.getLogger(BusinessService.class);
 
 	@Autowired
@@ -53,7 +54,7 @@ public class BusinessServiceImpl implements BusinessService {
 	 * @time 2019年6月12日
 	 */
 	@GlobalTransactional
-	@Override
+//	@Transactional
 	public Map<String, Object> purchase(@RequestParam("accountId") String accountId,
 			@RequestParam("orderId") String orderId, @RequestParam("storageId") String storageId) {
 		try {
@@ -82,7 +83,7 @@ public class BusinessServiceImpl implements BusinessService {
 			account.setRemark("备注");
 			
 			System.out.println("xid" + RootContext.getXID());
-			
+
 			Map<String, Object> insert = storageService.insert(storage);
 			if((int)insert.get("status") != 200) {
 				throw new RuntimeException((String)insert.get("message"));

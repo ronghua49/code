@@ -1,10 +1,10 @@
 #========================================server config=====================================
 server:
-  port: 8010
+  port: 7100
 #========================================spring config=====================================
 spring:
   application:
-    name: seata-springcloud-web
+    name: seata-springcloud-business
   devtools:
     restart:
       enabled: false
@@ -27,5 +27,3 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://@localhost:8761/eureka/
-
-

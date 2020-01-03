@@ -27,7 +27,7 @@ public interface BusinessService {
 	 * @author sly
 	 * @time 2019年6月12日
 	 */
-	@RequestMapping(value = "/business/purchase", method = RequestMethod.POST)
+	@RequestMapping(value = "/business/buy", method = RequestMethod.POST)
 	Map<String, Object> purchase(@RequestParam("accountId") String accountId, @RequestParam("orderId") String orderId,
 			@RequestParam("storageId") String storageId);
 

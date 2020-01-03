@@ -36,7 +36,7 @@ public class StorageServiceImpl implements StorageService {
 	@Override
 	public Map<String, Object> insert(@RequestBody Storage storage) {
 		System.out.println(RootContext.getXID());
-		//int a = 10/0;
+//		int a = 10/0;
 		storageMapper.insert(storage);
 		
 		
