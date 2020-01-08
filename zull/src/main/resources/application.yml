@@ -1,0 +1,16 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: api-gateway
+# zull 的最简单化配置直接配置服务id  等同于
+  #path: /service-hi/**
+  #serviceId: service-hi
+zuul:
+  routes:
+    service-hi:
+    service-feign:
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
