@@ -1,9 +1,9 @@
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-server:
-  port: 8762
 spring:
-  application:
-    name: service-hi
+  cloud:
+    config:
+      name: servicehi  # 作为config 客户端的应用名字 需要和config-server远程配置文件服务名对应
+      profile: dev   #服务环境名称  例如 {name}-{profile} = service-gateway-dev.yml
+      label: master  # 本地分支则无用
+      uri: http://localhost:9005
+#      discovery:   #可通过发现服务的方式进行配置 暂时没测试成功
+#        service-id: config-server

@@ -1,0 +1,41 @@
+#-----------------  使用本地配置文件-----------------------
+spring:
+  profiles:
+    active: native
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        native:
+          add-label-locations: false
+          search-locations: classpath:/config # 本地文件查找路径
+
+#--------------------eureka-server------------------------
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 9005
+#--------------------------- git 远程配置文件-------------------
+#spring:
+#  profiles:
+#    active: git #设置使用本地配置(默认是git,可以设置：subversion(SVN)，native(本地))
+#  application:
+#    name: config-server
+#  cloud:
+#    config:
+#      server:
+#        git:
+#          username:
+#          password:
+#          uri: https://gitee.com/ronghu49/config.git  # 配置文件git仓库地址  gitee 测试成功  github 测试没成功 网络问题居多
+#          timeout: 10 # 超时时间，默认是5秒，这里随便设置
+#          force-pull: true # 强制拉取覆盖
+#          default-label: master
+#          search-paths: # 仓库相对查找配置文件路径
+
+
+
+
