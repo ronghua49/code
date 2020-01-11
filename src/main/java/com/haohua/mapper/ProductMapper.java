@@ -82,4 +82,8 @@ public interface ProductMapper {
      * @return
      */
     int updateById(@Param("id") Integer id,@Param("version") Long version);
+
+    int getInventory(String pro_name);
+
+    void decrementStock(String proName);
 }

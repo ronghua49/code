@@ -2,52 +2,44 @@ package com.haohua.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Random;
 
 /**
  * Created By MBG-GUI-EXTENSION https://github.com/spawpaw/mybatis-generator-gui-extension
  * Description:
- * 
  *
- * @author 
+ * @author
  */
 public class Product implements Serializable {
+    private int userId = new Random().nextInt(10000);// 高并发模拟请求用户id
+    // 请求处理状态
+    private int status=0;// 0：未处理 1：处理成功 2：处理失败
     /**
-     *
-     *
      * @mbg.generated Wed Feb 20 20:43:17 CST 2019
      */
     private Integer id;
 
     /**
-     *
-     *
      * @mbg.generated Wed Feb 20 20:43:17 CST 2019
      */
     private String pro_name;
 
     /**
-     *
-     *
      * @mbg.generated Wed Feb 20 20:43:17 CST 2019
      */
     private BigDecimal pro_price;
 
     /**
-     *
-     *
      * @mbg.generated Wed Feb 20 20:43:17 CST 2019
      */
     private Integer inventory;
 
     /**
-     *
-     *
      * @mbg.generated Wed Feb 20 20:43:17 CST 2019
      */
     private Long version;
 
     /**
-     *
      * @mbg.generated Wed Feb 20 20:43:17 CST 2019
      */
     private static final long serialVersionUID = 1L;
@@ -56,15 +48,21 @@ public class Product implements Serializable {
      * This method returns the value of the database column demo..product.id
      *
      * @return the value of demo..product.id
-     *
      * @mbg.generated Wed Feb 20 20:43:17 CST 2019
      */
     public Integer getId() {
         return id;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     /**
-     *
      * @mbg.generated Wed Feb 20 20:43:17 CST 2019
      */
     public Product withId(Integer id) {
@@ -72,11 +70,18 @@ public class Product implements Serializable {
         return this;
     }
 
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     /**
      * This method sets the value of the database column demo..product.id
      *
      * @param id the value for demo..product.id
-     *
      * @mbg.generated Wed Feb 20 20:43:17 CST 2019
      */
     public void setId(Integer id) {
@@ -87,7 +92,6 @@ public class Product implements Serializable {
      * This method returns the value of the database column demo..product.pro_name
      *
      * @return the value of demo..product.pro_name
-     *
      * @mbg.generated Wed Feb 20 20:43:17 CST 2019
      */
     public String getPro_name() {
@@ -95,7 +99,6 @@ public class Product implements Serializable {
     }
 
     /**
-     *
      * @mbg.generated Wed Feb 20 20:43:17 CST 2019
      */
     public Product withPro_name(String pro_name) {
@@ -107,7 +110,6 @@ public class Product implements Serializable {
      * This method sets the value of the database column demo..product.pro_name
      *
      * @param pro_name the value for demo..product.pro_name
-     *
      * @mbg.generated Wed Feb 20 20:43:17 CST 2019
      */
     public void setPro_name(String pro_name) {
@@ -118,7 +120,6 @@ public class Product implements Serializable {
      * This method returns the value of the database column demo..product.pro_price
      *
      * @return the value of demo..product.pro_price
-     *
      * @mbg.generated Wed Feb 20 20:43:17 CST 2019
      */
     public BigDecimal getPro_price() {
@@ -126,7 +127,6 @@ public class Product implements Serializable {
     }
 
     /**
-     *
      * @mbg.generated Wed Feb 20 20:43:17 CST 2019
      */
     public Product withPro_price(BigDecimal pro_price) {
@@ -138,7 +138,6 @@ public class Product implements Serializable {
      * This method sets the value of the database column demo..product.pro_price
      *
      * @param pro_price the value for demo..product.pro_price
-     *
      * @mbg.generated Wed Feb 20 20:43:17 CST 2019
      */
     public void setPro_price(BigDecimal pro_price) {
@@ -149,7 +148,6 @@ public class Product implements Serializable {
      * This method returns the value of the database column demo..product.inventory
      *
      * @return the value of demo..product.inventory
-     *
      * @mbg.generated Wed Feb 20 20:43:17 CST 2019
      */
     public Integer getInventory() {
@@ -157,7 +155,6 @@ public class Product implements Serializable {
     }
 
     /**
-     *
      * @mbg.generated Wed Feb 20 20:43:17 CST 2019
      */
     public Product withInventory(Integer inventory) {
@@ -169,7 +166,6 @@ public class Product implements Serializable {
      * This method sets the value of the database column demo..product.inventory
      *
      * @param inventory the value for demo..product.inventory
-     *
      * @mbg.generated Wed Feb 20 20:43:17 CST 2019
      */
     public void setInventory(Integer inventory) {
@@ -180,7 +176,6 @@ public class Product implements Serializable {
      * This method returns the value of the database column demo..product.version
      *
      * @return the value of demo..product.version
-     *
      * @mbg.generated Wed Feb 20 20:43:17 CST 2019
      */
     public Long getVersion() {
@@ -188,7 +183,6 @@ public class Product implements Serializable {
     }
 
     /**
-     *
      * @mbg.generated Wed Feb 20 20:43:17 CST 2019
      */
     public Product withVersion(Long version) {
@@ -200,7 +194,6 @@ public class Product implements Serializable {
      * This method sets the value of the database column demo..product.version
      *
      * @param version the value for demo..product.version
-     *
      * @mbg.generated Wed Feb 20 20:43:17 CST 2019
      */
     public void setVersion(Long version) {
@@ -208,7 +201,6 @@ public class Product implements Serializable {
     }
 
     /**
-     *
      * @mbg.generated Wed Feb 20 20:43:17 CST 2019
      */
     @Override
@@ -227,7 +219,6 @@ public class Product implements Serializable {
     }
 
     /**
-     *
      * @mbg.generated Wed Feb 20 20:43:17 CST 2019
      */
     @Override
@@ -243,14 +234,13 @@ public class Product implements Serializable {
         }
         Product other = (Product) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getPro_name() == null ? other.getPro_name() == null : this.getPro_name().equals(other.getPro_name()))
-            && (this.getPro_price() == null ? other.getPro_price() == null : this.getPro_price().equals(other.getPro_price()))
-            && (this.getInventory() == null ? other.getInventory() == null : this.getInventory().equals(other.getInventory()))
-            && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()));
+                && (this.getPro_name() == null ? other.getPro_name() == null : this.getPro_name().equals(other.getPro_name()))
+                && (this.getPro_price() == null ? other.getPro_price() == null : this.getPro_price().equals(other.getPro_price()))
+                && (this.getInventory() == null ? other.getInventory() == null : this.getInventory().equals(other.getInventory()))
+                && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()));
     }
 
     /**
-     *
      * @mbg.generated Wed Feb 20 20:43:17 CST 2019
      */
     @Override

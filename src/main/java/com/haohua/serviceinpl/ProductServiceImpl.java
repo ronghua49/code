@@ -54,4 +54,14 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
+    @Override
+    public int getInventory(String pro_name) {
+        return productMapper.getInventory(pro_name);
+    }
+
+    @Override
+    public void decrementStock(String proName) {
+        productMapper.decrementStock(proName);
+    }
+
 }

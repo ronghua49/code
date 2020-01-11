@@ -16,4 +16,8 @@ public interface ProductService {
     Order getOrder();
     @Transactional(propagation = Propagation.REQUIRED,isolation =Isolation.READ_COMMITTED)
     Order getOrder2() throws BusyException;
+
+    int getInventory(String pro_name);
+
+    void decrementStock(String proName);
 }
