@@ -8,3 +8,15 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+xyjconfig:
+  #标识日志数据库所在微服务,默认值为xyj-admin
+  log-service-id: xyj-admin
+  #生成ID使用,数据中心编码[雪花算法],每个微服务需不同,取值范围 0~31,默认值0
+  datacenter-id: 0
+  #生成ID使用,机器或进程编码[雪花算法],每个微服务需不同,取值范围 0~31,默认值0
+  worker-id: 0
+  #配置表格渲染时扫描的实体类，设置包名，可以设置多个包名
+  scanmodel:
+    - com.xyjsoft.admin.model
+  #日志保存机制   0:InfluxDB   1:Mysql
+  logType: 0

@@ -29,9 +29,6 @@ public class ServiceHiApplication {
         return "hi " + name + ",i am from port:" + port;
     }
 
-
-
-
     @RequestMapping("/hoo")
     public String path() {
         return "get hoo  " + hoo + ",i am from port:" + port;
