@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/seata-springcloud/seata-springcloud.iml" filepath="$PROJECT_DIR$/seata-springcloud/seata-springcloud.iml" />
+      <module fileurl="file://$PROJECT_DIR$/seata-springcloud-account/seata-springcloud-account.iml" filepath="$PROJECT_DIR$/seata-springcloud-account/seata-springcloud-account.iml" />
+      <module fileurl="file://$PROJECT_DIR$/seata-springcloud-business/seata-springcloud-business.iml" filepath="$PROJECT_DIR$/seata-springcloud-business/seata-springcloud-business.iml" />
+      <module fileurl="file://$PROJECT_DIR$/seata-springcloud-business-api/seata-springcloud-business-api.iml" filepath="$PROJECT_DIR$/seata-springcloud-business-api/seata-springcloud-business-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/seata-springcloud-demo.iml" filepath="$PROJECT_DIR$/.idea/seata-springcloud-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/seata-springcloud-eureka/seata-springcloud-eureka.iml" filepath="$PROJECT_DIR$/seata-springcloud-eureka/seata-springcloud-eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/seata-springcloud-storage/seata-springcloud-storage.iml" filepath="$PROJECT_DIR$/seata-springcloud-storage/seata-springcloud-storage.iml" />
+    </modules>
+  </component>
+</project>
