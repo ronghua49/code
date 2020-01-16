@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/seata-common/seata-common.iml" filepath="$PROJECT_DIR$/seata-common/seata-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/seata-springcloud/seata-springcloud.iml" filepath="$PROJECT_DIR$/seata-springcloud/seata-springcloud.iml" />
       <module fileurl="file://$PROJECT_DIR$/seata-springcloud-account/seata-springcloud-account.iml" filepath="$PROJECT_DIR$/seata-springcloud-account/seata-springcloud-account.iml" />
       <module fileurl="file://$PROJECT_DIR$/seata-springcloud-business/seata-springcloud-business.iml" filepath="$PROJECT_DIR$/seata-springcloud-business/seata-springcloud-business.iml" />

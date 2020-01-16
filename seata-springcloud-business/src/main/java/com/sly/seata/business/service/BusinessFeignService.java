@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(value = "feigin-business",fallback = BusinesshystrixImpl.class)
+@FeignClient(value = "seata-springcloud-account",fallback = BusinesshystrixImpl.class)
 public interface BusinessFeignService {
 
     @RequestMapping(method = RequestMethod.POST, value = "/account/insert")
@@ -15,5 +15,5 @@ public interface BusinessFeignService {
                                  @RequestParam("orderId") String orderId, @RequestParam("storageId") String storageId);
 
     @GetMapping("/test")
-    String getTest(@RequestParam ("name")String name);
+    String getTest(@RequestParam String name);
 }

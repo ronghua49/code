@@ -32,9 +32,10 @@ public class BusinessController {
     }
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
-//    @GlobalTransactional
+    @GlobalTransactional(timeoutMills = 300000)
     public String test() {
         String purchase = feignService.getTest("hahahah");
+        int i = 1/0;
         return purchase;
 
     }

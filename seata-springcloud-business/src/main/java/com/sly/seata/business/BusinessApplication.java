@@ -12,7 +12,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  */
 @SpringBootApplication(scanBasePackages = "com.sly.seata")
 @EnableDiscoveryClient
-@EnableFeignClients
+@EnableFeignClients(basePackages = "com.sly.seata")
 public class BusinessApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BusinessApplication.class, args);

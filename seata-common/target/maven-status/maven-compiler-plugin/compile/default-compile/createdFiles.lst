@@ -1,0 +1,3 @@
+com\sly\seata\common\config\DatabaseConfiguration.class
+com\sly\seata\common\config\DruidConfig.class
+com\sly\seata\common\config\DruidDataSourceProperties.class

@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="seata-common" />
         <module name="seata-springcloud-account" />
         <module name="seata-springcloud-business" />
         <module name="seata-springcloud-business-api" />
@@ -15,6 +16,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="demo-test" target="1.8" />
+      <module name="seata-common" target="1.8" />
       <module name="seata-springcloud" target="1.8" />
       <module name="seata-springcloud-account" target="1.8" />
       <module name="seata-springcloud-business" target="1.8" />
@@ -27,6 +29,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="demo-test" options="-parameters" />
+      <module name="seata-common" options="-parameters" />
       <module name="seata-springcloud-account" options="-parameters" />
       <module name="seata-springcloud-business" options="-parameters" />
       <module name="seata-springcloud-business-api" options="-parameters" />

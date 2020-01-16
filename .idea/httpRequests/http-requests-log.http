@@ -1,0 +1,176 @@
+GET http://localhost:7200/business/test
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-01-16T022554.500.json
+
+###
+
+GET http://localhost:7200/business/test
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-01-16T022450.500.json
+
+###
+
+GET http://localhost:7200/business/test
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-01-16T022440.500.json
+
+###
+
+GET http://localhost:7200/business/test
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-01-16T114725.500.json
+
+###
+
+GET http://localhost:7200/business/test
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-01-16T102954.500.json
+
+###
+
+GET http://localhost:7200/business/test
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-01-16T095954.500.json
+
+###
+
+GET http://localhost:7200/business/test
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-01-16T094831.500.json
+
+###
+
+GET http://localhost:7200/business/test
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-01-16T094413.500.json
+
+###
+
+GET http://localhost:7200/business/test
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-01-16T093931.500.json
+
+###
+
+GET http://localhost:7200/business/test
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-01-16T093221.500.json
+
+###
+
+GET http://localhost:7200/business/test
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-01-16T093139.500.json
+
+###
+
+GET http://localhost:7200/business/test
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-01-16T093053.200.txt
+
+###
+
+GET http://localhost:7200/business/test
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-01-16T093049.200.txt
+
+###
+
+GET http://localhost:7200/business/test
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-01-16T092714.200.txt
+
+###
+
+GET http://localhost:7200/business/test
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-01-16T092634.200.txt
+
+###
+
+GET http://localhost:7200/business/test
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-01-16T090926.200.txt
+
+###
+
+GET http://localhost:7200/business/test
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-01-16T085444.200.txt
+
+###
+
+GET http://localhost:7200/business/test
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-01-16T085443.200.txt
+
+###
+
+GET http://localhost:7200/business/test
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-01-16T085442-1.200.txt
+
+###
+
+GET http://localhost:7200/business/test
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-01-16T085442.200.txt
+
+###
+
+GET http://localhost:7200/business/test
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-01-16T085439.200.txt
+
+###
+
+GET http://localhost:7200/business/test
+Accept: */*
+Cache-Control: no-cache
+
+<> 2020-01-16T085430.200.txt
+
+###
+

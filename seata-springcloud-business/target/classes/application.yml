@@ -8,6 +8,14 @@ spring:
   devtools:
     restart:
       enabled: false
+  datasource:
+    name: druidDataSource
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/car?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+      username: root
+      password: root
 
 
 #========================================eureka config=====================================
@@ -19,12 +27,20 @@ eureka:
 feign:
   hystrix:
     enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 50000
+        readTimeout: 50000
+        loggerLevel: full
 ribbon:
   eureka:
     enabled: true #关闭负载均衡
   ReadTimeout: 120000 #处理超时时间 默认5秒
   ConnectTimeout: 120000 #连接超时时间 默认2秒
 hystrix:
+  metrics:
+    enabled: true
   command:
     default:
       execution:
